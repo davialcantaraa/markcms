@@ -4,9 +4,6 @@ import {
   Component,
   Home,
   Loader2,
-  // type Icon as LucideIcon,
-  // type
-  LucideIcon,
   LucideProps,
   Moon,
   MoreVertical,
@@ -15,6 +12,7 @@ import {
   SunMedium,
   Trash,
   Twitter,
+  type LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { z } from "zod"
 
+import { ContentTable } from "@/components/content-table"
 import { CreateField } from "@/components/create-field"
 import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
@@ -42,6 +43,9 @@ export default async function Page({ params }: Props) {
           </div>
         </div>
         <CreateField model={model.data} />
+      </div>
+      <div className="mx-auto max-w-5xl px-6">
+        <ContentTable model={model.data} />
       </div>
     </main>
   )

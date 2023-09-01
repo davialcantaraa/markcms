@@ -13,8 +13,8 @@ model Content {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  content_model    ContentModel? @relation(fields: [content_model_id], references: [id])
-  content_model_id String?
+  model    ContentModel? @relation(fields: [model_id], references: [id])
+  model_id String?
   raw_data         Json
 
   @@map("content")

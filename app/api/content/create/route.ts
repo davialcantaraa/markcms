@@ -1,15 +1,12 @@
 import { auth } from "@clerk/nextjs"
-import { ContentField } from "@prisma/client"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
 import { db } from "@/lib/prisma"
 
 const schema = z.object({
-  name: z.string().min(2).max(50),
   user_id: z.string().min(2),
   model_id: z.string().uuid(),
-  type: z.nativeEnum(ContentField),
 })
 
 export async function POST(request: Request) {
@@ -32,37 +29,24 @@ export async function POST(request: Request) {
     }
 
     const {
-      data: { model_id, type, user_id, name },
+      data: { model_id, user_id },
     } = validation
 
-    const contents = await db.$transaction(async (ctx) => {
-      const contents = await db.content.findMany({
+    await db.$transaction(async (ctx) => {
+      const fields = await ctx.field.findMany({
         where: {
           creator_id: user_id,
           model_id,
         },
       })
 
-      if (contents.length) {
-        const field = await ctx.field.create({
-          data: {
-            creator_id: user_id,
-            model_id,
-            type,
-            name,
-          },
-        })
-
-
-        // await ctx.content.updateMany((item) => )
-      }
-
-      await ctx.field.create({
+      await ctx.content.create({
         data: {
           creator_id: user_id,
           model_id,
-          type,
-          name,
+          raw_data: fields.map((item) => ({
+            [item.name.toLocaleLowerCase()]: "",
+          })),
         },
       })
     })

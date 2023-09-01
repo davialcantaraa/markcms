@@ -1,5 +1,6 @@
 "use client"
 
+import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ContentField, ContentModel } from "@prisma/client"
@@ -63,6 +64,7 @@ export const CreateField = ({ model }: Props) => {
     mutationFn: createField,
     onSuccess: async (response) => {
       toast.success(response.data.message)
+      queryClient.invalidateQueries(["get-fields"])
       toggle()
     },
     onError: (error: ErrorResponse) => {
