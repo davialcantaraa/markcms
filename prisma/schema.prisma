@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Content {
+  id         String   @id @default(uuid())
+  creator_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  content_model    ContentModel? @relation(fields: [content_model_id], references: [id])
+  content_model_id String?
+  raw_data         Json
+
+  @@map("content")
+}
+
+model ContentModel {
+  id         String   @id @default(uuid())
+  creator_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name        String
+  description String
+  content     Content[]
+  fields      Field[]
+
+  @@map("content-model")
+}
+
+model Field {
+  id         String   @id @default(uuid())
+  creator_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  name       String
+
+  type     ContentField
+  model    ContentModel @relation(fields: [model_id], references: [id])
+  model_id String
+
+  @@map("field")
+}
+
+enum ContentField {
+  TEXT
+  MARKDOWN
+  DATE
+  NUMBER
+  CHECKBOX
+  EMAIL
+  URL
+  PHONE
+}
