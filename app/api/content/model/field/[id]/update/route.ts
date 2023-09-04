@@ -7,13 +7,22 @@ import { db } from "@/lib/prisma"
 
 const schema = z.object({
   name: z.string().min(2).max(50),
-  user_id: z.string().min(2),
-  model_id: z.string().uuid(),
+  field_id: z.string().uuid(),
   type: z.nativeEnum(ContentField),
 })
 
-export async function POST(request: Request) {
+interface Params {
+  params: {
+    id: string
+  }
+}
+
+export async function PUT(request: Request, { params }: Params) {
   try {
+    const isIdValid = z.string().uuid().safeParse(params.id)
+    if (!isIdValid.success)
+      return NextResponse.json("Invalid id", { status: 400 })
+
     const body = await request.json()
     const validation = schema.safeParse(body)
 
@@ -32,20 +41,21 @@ export async function POST(request: Request) {
     }
 
     const {
-      data: { model_id, type, user_id, name },
+      data: { type, name },
     } = validation
 
-    await db.field.create({
+    await db.field.update({
+      where: {
+        id: params.id,
+      },
       data: {
-        creator_id: user_id,
-        model_id,
         type,
         name,
       },
     })
 
     return NextResponse.json(
-      { message: "Content model created successfully." },
+      { message: "Field updated successfully." },
       { status: 201 }
     )
   } catch (error) {

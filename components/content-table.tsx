@@ -24,58 +24,59 @@ import { getFieldsByModelId } from "@/lib/api/get-fields-by-model-id"
 
 import { CreateContent } from "./create-content"
 import { CreateField } from "./create-field"
+import { EditField } from "./edit-field"
 import { EmptyPlaceholder } from "./empty-placeholder"
 
 interface Props {
   model: ContentModel
 }
 
-function getColumns(fields: Field[]): ColumnDef<any>[] {
-  const mainFields: ColumnDef<any>[] = [
-    {
-      accessorKey: "created_at",
-      header: "Created at",
-      cell: ({ row }) => {
-        const created_at: string = row.getValue("created_at")
-        return format(new Date(created_at), "dd/MM/yyyy")
-      },
-    },
-    {
-      accessorKey: "updated_at",
-      header: "Last update",
-      cell: ({ row }) => {
-        const updated_at: string = row.getValue("updated_at")
-        return format(new Date(updated_at), "dd/MM/yyyy")
-      },
-    },
-  ]
-  const newFields: ColumnDef<any>[] = fields.map((item) => ({
-    accessorKey: item.name.toLowerCase(),
-    header: item.name,
-  }))
-  return newFields.concat(mainFields)
-}
-
-function getContents(contents: Content[], fields: Field[]) {
-  return contents.map((item) => {
-    let dynamicParams: { [key: string]: any } = {
-      created_at: item.created_at,
-      updated_at: item.updated_at,
-    }
-
-    fields.forEach((field) => {
-      const fieldName = field.name.toLowerCase()
-      // @ts-ignore
-      dynamicParams[fieldName] = item.raw_data[field.name]
-    })
-
-    return dynamicParams
-  })
-}
-
 export function ContentTable({ model }: Props) {
   const [columns, setColumns] = useState<ColumnDef<any>[]>([])
   const [data, setData] = useState<Partial<Content>[]>([])
+
+  function getColumns(fields: Field[]): ColumnDef<any>[] {
+    const mainFields: ColumnDef<any>[] = [
+      {
+        accessorKey: "created_at",
+        header: "Created at",
+        cell: ({ row }) => {
+          const created_at: string = row.getValue("created_at")
+          return format(new Date(created_at), "dd/MM/yyyy")
+        },
+      },
+      {
+        accessorKey: "updated_at",
+        header: "Last update",
+        cell: ({ row }) => {
+          const updated_at: string = row.getValue("updated_at")
+          return format(new Date(updated_at), "dd/MM/yyyy")
+        },
+      },
+    ]
+    const newFields: ColumnDef<any>[] = fields.map((item) => ({
+      accessorKey: item.name.toLowerCase(),
+      header: () => <EditField field={item} />,
+    }))
+    return newFields.concat(mainFields)
+  }
+
+  function getContents(contents: Content[], fields: Field[]) {
+    return contents.map((item) => {
+      let dynamicParams: { [key: string]: any } = {
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+      }
+
+      fields.forEach((field) => {
+        const fieldName = field.name.toLowerCase()
+        // @ts-ignore
+        dynamicParams[fieldName] = item.raw_data[field.name]
+      })
+
+      return dynamicParams
+    })
+  }
 
   const fields = useQuery({
     queryKey: ["get-fields"],
