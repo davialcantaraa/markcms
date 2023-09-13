@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react"
 
-import { ApplicationHeader } from "@/components/application-header"
-import { ApplicationSidebar } from "@/components/application-sidebar"
+import { ApplicationHeader } from "@/components/application/application-header"
+import { ApplicationSidebar } from "@/components/application/application-sidebar"
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

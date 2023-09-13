@@ -1,6 +1,9 @@
+import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
   ArrowLeft,
   ArrowRight,
+  CalendarIcon,
+  Code,
   Component,
   Home,
   Loader2,
@@ -30,6 +33,9 @@ export const Icons = {
   spinner: Loader2,
   model: Component,
   pen: Pen,
+  dots: DotsHorizontalIcon,
+  calendar: CalendarIcon,
+  api: Code,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

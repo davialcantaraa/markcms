@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { Balancer } from "react-wrap-balancer"
 
-import { applicationConfig } from "@/config/application"
+import { HomepageHeader } from "@/components/homepage/homepage-header"
 import { buttonVariants } from "@/components/ui/button"
-import { HomepageHeader } from "@/components/homepage-header"
+import { applicationConfig } from "@/config/application"
 
 export default function IndexPage() {
   return (

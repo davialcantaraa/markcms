@@ -1,6 +1,6 @@
 "use client"
 
-import { Content, ContentModel, Field } from "@prisma/client"
+import { Content, ContentField, ContentModel, Field } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import {
   ColumnDef,
@@ -9,6 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import { format } from "date-fns"
+import Link from "next/link"
 import { useState } from "react"
 
 import {
@@ -22,10 +23,48 @@ import {
 import { getContentsByModelId } from "@/lib/api/get-contents-by-model-id"
 import { getFieldsByModelId } from "@/lib/api/get-fields-by-model-id"
 
+import { EmptyPlaceholder } from "../empty-placeholder"
+import { CreateField } from "../field/create-field"
+import { EditField } from "../field/edit-field"
+import { Icons } from "../icons"
+import { ModelItem } from "../model/model-item"
+import { Button } from "../ui/button"
+import { Checkbox } from "../ui/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu"
 import { CreateContent } from "./create-content"
-import { CreateField } from "./create-field"
-import { EditField } from "./edit-field"
-import { EmptyPlaceholder } from "./empty-placeholder"
+
+interface FieldProps {
+  type: ContentField
+  value: any
+}
+
+function Field({ type, value }: FieldProps) {
+  switch (type) {
+    case ContentField.TEXT:
+      return <span>{value}</span>
+    case ContentField.CHECKBOX:
+      return (
+        <Checkbox  checked={value} className="pointer-events-none select-none"/>
+      )
+    case ContentField.NUMBER:
+      return <span>{value}</span>
+    case ContentField.EMAIL:
+      return <a href={`mailto:${value}`}>{value}</a>
+    case ContentField.PHONE:
+      return <a href={`tel:${value}`}>{value}</a>
+    case ContentField.URL:
+      return <a href={value}>{value}</a>
+    case ContentField.DATE:
+      return (<time>{value}</time>
+      )
+  }
+}
 
 interface Props {
   model: ContentModel
@@ -34,6 +73,12 @@ interface Props {
 export function ContentTable({ model }: Props) {
   const [columns, setColumns] = useState<ColumnDef<any>[]>([])
   const [data, setData] = useState<Partial<Content>[]>([])
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
 
   function getColumns(fields: Field[]): ColumnDef<any>[] {
     const mainFields: ColumnDef<any>[] = [
@@ -53,10 +98,42 @@ export function ContentTable({ model }: Props) {
           return format(new Date(updated_at), "dd/MM/yyyy")
         },
       },
+      {
+        id: "actions",
+        enableHiding: false,
+        cell: ({ row }) => {
+          const content = row.original
+
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <Icons.dots className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <Link href={`/content/${content.id}`}>Edit content</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Share</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="text-red-500 hover:text-red-500">
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )
+        },
+      },
     ]
     const newFields: ColumnDef<any>[] = fields.map((item) => ({
       accessorKey: item.name.toLowerCase(),
       header: () => <EditField field={item} />,
+      cell: ({ row }) => {
+        const value: string = row.getValue(item.name.toLowerCase())
+        return <div className="ml-3">{Field({type: item.type, value})}</div>
+      },
     }))
     return newFields.concat(mainFields)
   }
@@ -64,6 +141,7 @@ export function ContentTable({ model }: Props) {
   function getContents(contents: Content[], fields: Field[]) {
     return contents.map((item) => {
       let dynamicParams: { [key: string]: any } = {
+        id: item.id,
         created_at: item.created_at,
         updated_at: item.updated_at,
       }
@@ -71,7 +149,7 @@ export function ContentTable({ model }: Props) {
       fields.forEach((field) => {
         const fieldName = field.name.toLowerCase()
         // @ts-ignore
-        dynamicParams[fieldName] = item.raw_data[field.name]
+        dynamicParams[fieldName] = item.raw_data[fieldName]
       })
 
       return dynamicParams
@@ -95,12 +173,6 @@ export function ContentTable({ model }: Props) {
       setData(newContents)
     },
     enabled: !!fields.data?.data.length,
-  })
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
   })
 
   return (
@@ -156,6 +228,12 @@ export function ContentTable({ model }: Props) {
             </TableRow>
           </TableBody>
         </Table>
+      ) : contents.isFetching || fields.isFetching ? (
+        <div className="divide-border-200 divide-y rounded-md border">
+          <ModelItem.Skeleton />
+          <ModelItem.Skeleton />
+          <ModelItem.Skeleton />
+        </div>
       ) : (
         <EmptyPlaceholder>
           <EmptyPlaceholder.Icon name="model" />

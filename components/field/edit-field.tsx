@@ -32,16 +32,16 @@ import { updateFieldById } from "@/lib/api/update-field-by-id"
 import { capitalizeFirstLetter } from "@/lib/utils"
 import { ErrorResponse } from "@/types/api"
 
-import { Icons } from "./icons"
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
+import { Icons } from "../icons"
+import { Button } from "../ui/button"
+import { Input } from "../ui/input"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select"
+} from "../ui/select"
 
 const schema = z.object({
   name: z.string().min(2).max(50),

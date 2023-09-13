@@ -7,7 +7,7 @@ import { applicationConfig } from "@/config/application"
 import { applicationNavigation } from "@/config/application-navigation"
 import { cn } from "@/lib/utils"
 
-import { Icons } from "./icons"
+import { Icons } from "../icons"
 
 export const ApplicationSidebar = () => {
   const pathname = usePathname()

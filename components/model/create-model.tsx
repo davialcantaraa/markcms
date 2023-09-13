@@ -30,10 +30,10 @@ import {
 import { createModel } from "@/lib/api/create-model"
 import { ErrorResponse } from "@/types/api"
 
-import { Icons } from "./icons"
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Textarea } from "./ui/textarea"
+import { Icons } from "../icons"
+import { Button } from "../ui/button"
+import { Input } from "../ui/input"
+import { Textarea } from "../ui/textarea"
 
 const schema = z.object({
   name: z.string().min(2, {

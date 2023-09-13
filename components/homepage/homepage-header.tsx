@@ -1,13 +1,13 @@
-import Link from "next/link"
 import { currentUser } from "@clerk/nextjs"
 import { User } from "@clerk/nextjs/api"
+import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 
+import { Icons } from "../icons"
+import { Logo } from "../logo"
+import { buttonVariants } from "../ui/button"
 import { HomepageNavigation } from "./homepage-navigation"
-import { Icons } from "./icons"
-import { Logo } from "./logo"
-import { buttonVariants } from "./ui/button"
 
 export const HomepageHeader = async () => {
   const user: User | null = await currentUser()

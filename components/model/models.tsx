@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getModels } from "@/lib/api/get-models"
 
+import { EmptyPlaceholder } from "../empty-placeholder"
 import { CreateModel } from "./create-model"
-import { EmptyPlaceholder } from "./empty-placeholder"
 import { ModelItem } from "./model-item"
 
 export const Models = () => {

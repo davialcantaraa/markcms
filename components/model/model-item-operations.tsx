@@ -86,7 +86,7 @@ export function ModelItemOperations({ model }: ModelItemOperationsProps) {
                 e.preventDefault()
                 deleteModelMutation.mutate(model.id)
               }}
-              className="bg-red-600 focus:ring-red-600"
+              className="bg-red-500 focus:ring-red-500"
             >
               {deleteModelMutation.isLoading ? (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />

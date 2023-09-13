@@ -9,8 +9,8 @@ import { toast } from "sonner"
 import { createContent } from "@/lib/api/create-content"
 import { ErrorResponse } from "@/types/api"
 
-import { Icons } from "./icons"
-import { Button } from "./ui/button"
+import { Icons } from "../icons"
+import { Button } from "../ui/button"
 
 interface Props {
   model: ContentModel

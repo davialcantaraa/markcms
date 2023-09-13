@@ -1,6 +1,5 @@
-
-import { CreateModel } from "@/components/create-model"
-import { Models } from "@/components/models"
+import { CreateModel } from "@/components/model/create-model"
+import { Models } from "@/components/model/models"
 
 export default async function Page() {
   return (
