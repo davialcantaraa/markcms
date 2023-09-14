@@ -1,3 +1,4 @@
+import { ContentStoreInitializer } from "@/stores/content-store-initializer"
 import { Content } from "@prisma/client"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -57,8 +58,9 @@ export default async function Page({ params }: Props) {
         </Button>
       </div>
       <div className="mx-auto max-w-5xl px-6">
-        <ContentForm content={content.data} />
+        <ContentForm />
       </div>
+      <ContentStoreInitializer content={content.data} />
     </main>
   )
 }

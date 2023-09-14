@@ -32,6 +32,7 @@ export const Icons = {
   trash: Trash,
   spinner: Loader2,
   model: Component,
+  field: Component,
   pen: Pen,
   dots: DotsHorizontalIcon,
   calendar: CalendarIcon,

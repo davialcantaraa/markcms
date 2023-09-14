@@ -1,16 +1,32 @@
-import { z } from "zod"
+import { Content, Field } from "@prisma/client"
 import { create } from "zustand"
 
-const schema = z.object({
-  rawData: z.record(z.any()),
-})
+interface ExtendedContent extends Content {
+  model: {
+    fields: Field[]
+    name: string
+  } | null
+}
 
-type State = z.infer<typeof schema>
+type State = {
+  content: ExtendedContent
+}
 type Action = {
-  setRawData: (data: any) => void
+  setContent: (data: ExtendedContent) => void
 }
 
 export const useContentStore = create<State & Action>((set) => ({
-  rawData: {},
-  setRawData: (data: any) => set(() => ({ rawData: data })),
+  content: {
+    created_at: new Date(),
+    creator_id: "",
+    id: "",
+    model_id: "",
+    raw_data: {},
+    updated_at: new Date(),
+    model: {
+      fields: [],
+      name: "",
+    },
+  },
+  setContent: (data: ExtendedContent) => set(() => ({ content: data })),
 }))

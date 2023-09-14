@@ -4,8 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getModels } from "@/lib/api/get-models"
 
-import { EmptyPlaceholder } from "../empty-placeholder"
-import { CreateModel } from "./create-model"
+import { ModelEmptyState } from "../empty-states/model-empty-state"
 import { ModelItem } from "./model-item"
 
 export const Models = () => {
@@ -29,14 +28,7 @@ export const Models = () => {
           <ModelItem.Skeleton />
         </div>
       ) : (
-        <EmptyPlaceholder>
-          <EmptyPlaceholder.Icon name="model" />
-          <EmptyPlaceholder.Title>No models created</EmptyPlaceholder.Title>
-          <EmptyPlaceholder.Description>
-            You don&apos;t have any models yet. Start creating a model.
-          </EmptyPlaceholder.Description>
-          <CreateModel />
-        </EmptyPlaceholder>
+        <ModelEmptyState />
       )}
     </div>
   )

@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       data: { model_id, user_id },
     } = validation
 
-    await db.$transaction(async (ctx) => {
+    const content = await db.$transaction(async (ctx) => {
       const fields = await ctx.field.findMany({
         where: {
           creator_id: user_id,
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         },
       })
 
-      await ctx.content.create({
+      return await ctx.content.create({
         data: {
           creator_id: user_id,
           model_id,
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     })
 
     return NextResponse.json(
-      { message: "Content model created successfully." },
+      { message: "Content created successfully.", id: content.id },
       { status: 201 }
     )
   } catch (error) {

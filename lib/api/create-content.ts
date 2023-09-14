@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { SuccessResponse } from "@/types/api"
+import { SuccessIdResponse } from "@/types/api"
 
 import { http } from "./http"
 
@@ -12,6 +12,6 @@ const schema = z.object({
 
 export async function createContent(
   data: z.infer<typeof schema>
-): Promise<SuccessResponse> {
+): Promise<SuccessIdResponse> {
   return await http.post("/content/create", data)
 }

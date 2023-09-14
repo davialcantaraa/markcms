@@ -1,9 +1,10 @@
 "use client"
 
 import { queryClient } from "@/providers/app-provider"
+import { useModelStore } from "@/stores/model-store"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ContentField, ContentModel } from "@prisma/client"
+import { ContentField } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -48,13 +49,10 @@ const schema = z.object({
   type: z.nativeEnum(ContentField),
 })
 
-interface Props {
-  model: ContentModel
-}
-
 const FIELDS = Object.values(ContentField)
 
-export const CreateField = ({ model }: Props) => {
+export const CreateField = () => {
+  const { model } = useModelStore()
   const [open, toggle] = useToggle(false)
 
   const user = useAuth()

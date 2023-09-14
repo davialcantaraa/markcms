@@ -4,6 +4,7 @@ import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
 import { ContentModel } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 import { createContent } from "@/lib/api/create-content"
@@ -18,6 +19,7 @@ interface Props {
 
 export const CreateContent = ({ model }: Props) => {
   const user = useAuth()
+  const router = useRouter()
 
   const createContentMutation = useMutation({
     mutationKey: ["create-content"],
@@ -25,6 +27,7 @@ export const CreateContent = ({ model }: Props) => {
     onSuccess: async (response) => {
       toast.success(response.data.message)
       queryClient.invalidateQueries(["get-contents"])
+      router.push(`/content/${response.data.id}`)
     },
     onError: (error: ErrorResponse) => {
       toast.error(error.response?.data.message)

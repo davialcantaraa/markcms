@@ -1,3 +1,5 @@
+import { useModelStore } from "@/stores/model-store"
+import { ModelStoreInitializer } from "@/stores/model-store-initializer"
 import { ContentModel } from "@prisma/client"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -25,6 +27,8 @@ export default async function Page({ params }: Props) {
 
   if (!isModelValid.success) return notFound()
 
+  useModelStore.setState({ model: model.data })
+
   return (
     <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
       <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
@@ -42,11 +46,12 @@ export default async function Page({ params }: Props) {
             <p className="text-muted-foreground">{model.data.description}</p>
           </div>
         </div>
-        <CreateField model={model.data} />
+        <CreateField />
       </div>
       <div className="mx-auto max-w-5xl px-6">
-        <ContentTable model={model.data} />
+        <ContentTable />
       </div>
+      <ModelStoreInitializer model={model.data} />
     </main>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
-import { Content, ContentField, ContentModel, Field } from "@prisma/client"
+import { useModelStore } from "@/stores/model-store"
+import { Content, Field } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import {
   ColumnDef,
@@ -23,13 +24,11 @@ import {
 import { getContentsByModelId } from "@/lib/api/get-contents-by-model-id"
 import { getFieldsByModelId } from "@/lib/api/get-fields-by-model-id"
 
-import { EmptyPlaceholder } from "../empty-placeholder"
-import { CreateField } from "../field/create-field"
+import { FieldEmptyState } from "../empty-states/field-empty-state"
 import { EditField } from "../field/edit-field"
 import { Icons } from "../icons"
 import { ModelItem } from "../model/model-item"
 import { Button } from "../ui/button"
-import { Checkbox } from "../ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,40 +36,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import { TableField } from "./content-table-field"
 import { CreateContent } from "./create-content"
 
-interface FieldProps {
-  type: ContentField
-  value: any
-}
-
-function Field({ type, value }: FieldProps) {
-  switch (type) {
-    case ContentField.TEXT:
-      return <span>{value}</span>
-    case ContentField.CHECKBOX:
-      return (
-        <Checkbox  checked={value} className="pointer-events-none select-none"/>
-      )
-    case ContentField.NUMBER:
-      return <span>{value}</span>
-    case ContentField.EMAIL:
-      return <a href={`mailto:${value}`}>{value}</a>
-    case ContentField.PHONE:
-      return <a href={`tel:${value}`}>{value}</a>
-    case ContentField.URL:
-      return <a href={value}>{value}</a>
-    case ContentField.DATE:
-      return (<time>{value}</time>
-      )
-  }
-}
-
-interface Props {
-  model: ContentModel
-}
-
-export function ContentTable({ model }: Props) {
+export function ContentTable() {
+  const { model } = useModelStore()
   const [columns, setColumns] = useState<ColumnDef<any>[]>([])
   const [data, setData] = useState<Partial<Content>[]>([])
 
@@ -114,7 +84,7 @@ export function ContentTable({ model }: Props) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild className="cursor-pointer">
-                  <Link href={`/content/${content.id}`}>Edit content</Link>
+                  <Link href={`/content/${content.id}`}>Edit</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>Share</DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -132,7 +102,11 @@ export function ContentTable({ model }: Props) {
       header: () => <EditField field={item} />,
       cell: ({ row }) => {
         const value: string = row.getValue(item.name.toLowerCase())
-        return <div className="ml-3">{Field({type: item.type, value})}</div>
+        return (
+          <div className="ml-3 max-w-[200px] truncate">
+            {TableField({ type: item.type, value })}
+          </div>
+        )
       },
     }))
     return newFields.concat(mainFields)
@@ -214,6 +188,12 @@ export function ContentTable({ model }: Props) {
                   ))}
                 </TableRow>
               ))
+            ) : contents.isFetching ? (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="text-center">
+                  <ModelItem.Skeleton />
+                </TableCell>
+              </TableRow>
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="text-center">
@@ -235,15 +215,7 @@ export function ContentTable({ model }: Props) {
           <ModelItem.Skeleton />
         </div>
       ) : (
-        <EmptyPlaceholder>
-          <EmptyPlaceholder.Icon name="model" />
-          <EmptyPlaceholder.Title>No fields created</EmptyPlaceholder.Title>
-          <EmptyPlaceholder.Description>
-            You don&apos;t have any fields in your model. Start creating a
-            field.
-          </EmptyPlaceholder.Description>
-          <CreateField model={model} />
-        </EmptyPlaceholder>
+        <FieldEmptyState />
       )}
     </div>
   )
