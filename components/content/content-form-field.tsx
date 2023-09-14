@@ -7,14 +7,13 @@ import { ControllerRenderProps, FieldValues } from "react-hook-form"
 import { cn } from "@/lib/utils"
 
 import { Icons } from "../icons"
-import { MarkdownEditor } from "../markdown/markdown-editor"
 import { Button } from "../ui/button"
 import { Calendar } from "../ui/calendar"
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Switch } from "../ui/switch"
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
+import { ContentFormMarkdown } from "./content-form-markdown"
 
 interface Props {
   type: ContentField
@@ -89,28 +88,7 @@ export const FormField = ({ type, field }: Props) => {
         </FormItem>
       )
     case ContentField.MARKDOWN:
-      return (
-        <FormItem>
-          <div className="flex justify-between">
-            <FormLabel>{field.name}</FormLabel>
-            <Tabs defaultValue="account" value="account">
-              <TabsList>
-                <TabsTrigger value="account">Markdown</TabsTrigger>
-                <TabsTrigger value="password">Preview</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-          <FormControl>
-            <MarkdownEditor
-              markdown={field.value}
-              loading={false}
-              onCodeChange={() => {}}
-              {...field}
-            />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )
+      return <ContentFormMarkdown field={field} />
     case ContentField.DATE:
       return (
         <FormItem>
