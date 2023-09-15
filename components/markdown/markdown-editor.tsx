@@ -7,15 +7,13 @@ import "@/styles/markdown.css"
 
 import { monacoInstanceType } from "@/types"
 
-import { MarkdownSkeleton } from "./markdown-skeleton"
 
 interface Props {
   markdown: string
   onCodeChange: (value: string) => void
-  loading: boolean
 }
 
-export const MarkdownEditor = ({ markdown, onCodeChange, loading }: Props) => {
+export const MarkdownEditor = ({ markdown, onCodeChange }: Props) => {
   const { theme } = useTheme()
 
   const editorMount: OnMount = (editorL: monacoInstanceType) => {
@@ -28,14 +26,11 @@ export const MarkdownEditor = ({ markdown, onCodeChange, loading }: Props) => {
 
   return (
     <div className="relative flex h-96 w-full rounded-md border border-input bg-transparent">
-      {loading && <MarkdownSkeleton className="px-14" />}
-
       <Editor
         language="markdown"
         value={markdown}
         onMount={editorMount}
         theme={theme === "dark" ? "vs-dark" : "vs-light"}
-        loading={<MarkdownSkeleton className="px-14" />}
         onChange={handleEditorChange}
         options={{
           minimap: {
@@ -63,7 +58,7 @@ export const MarkdownEditor = ({ markdown, onCodeChange, loading }: Props) => {
           cursorBlinking: "smooth",
           dragAndDrop: true,
         }}
-        className="px-4"
+        className="px-6"
       />
     </div>
   )

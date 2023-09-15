@@ -1,16 +1,14 @@
-import "@/styles/mdx.css"
+import "@/styles/markdown.css"
 
 import { useEffect, useRef } from "react"
 
-import { MarkdownSkeleton } from "./markdown-skeleton"
 import { ParseMarkdown } from "./parse-markdown"
 
 interface Props {
   code: string
-  loading: boolean
 }
 
-export const MarkdownPreview = ({ code, loading }: Props) => {
+export const MarkdownPreview = ({ code }: Props) => {
   const previewSectionRef = useRef<HTMLDivElement | null>(null)
   const mPos = useRef<number | null>(null)
 
@@ -51,10 +49,9 @@ export const MarkdownPreview = ({ code, loading }: Props) => {
   return (
     <div
       ref={previewSectionRef}
-      className="preview-section relative flex  h-full w-full flex-col overflow-scroll border-l border-t px-12 py-8 lg:w-[36%] lg:min-w-[25%]  lg:border-t-0"
+      className="relative h-96 w-full rounded-md border border-input bg-transparent px-6"
     >
       <div className="absolute left-0 top-0 h-full w-1 cursor-ew-resize"></div>
-      {loading && <MarkdownSkeleton />}
       <ParseMarkdown code={code} codeCopyable />
     </div>
   )

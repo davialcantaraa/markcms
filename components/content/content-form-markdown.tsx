@@ -3,8 +3,6 @@
 import { useState } from "react"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 
-import { EditorCodeType } from "@/types/content"
-
 import { MarkdownEditor } from "../markdown/markdown-editor"
 import { MarkdownPreview } from "../markdown/markdown-preview"
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form"
@@ -15,42 +13,31 @@ interface Props {
 }
 
 export const ContentFormMarkdown = ({ field }: Props) => {
-  const [codes, setCodes] = useState([])
+  const [tab, setTab] = useState("markdown")
   return (
     <FormItem>
       <div className="flex justify-between">
         <FormLabel>{field.name}</FormLabel>
-        <Tabs defaultValue="account" value="account">
+        <Tabs defaultValue="markdown" value={tab} onValueChange={setTab}>
           <TabsList>
-            <TabsTrigger value="account">Markdown</TabsTrigger>
-            <TabsTrigger value="password">Preview</TabsTrigger>
+            <TabsTrigger value="markdown">Markdown</TabsTrigger>
+            <TabsTrigger value="preview">Preview</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
       <FormControl>
-        <MarkdownEditor
-          markdown={field.value}
-          loading={false}
-          onCodeChange={() => {}}
-          // onCodeChange={(code) => {
-          //   setCodes((prev) => {
-          //     return prev.map((prevCode: PrevCodeType) => {
-          //       if (prevCode.section_id === editorActiveSection) {
-          //         return {
-          //           ...prevCode,
-          //           content: code,
-          //         }
-          //       }
-          //       return prevCode
-          //     })
-          //   })
-          // }}
-          {...field}
-        />
-        <MarkdownPreview
-          loading={false}
-          code={codes.map((code: EditorCodeType) => code.content).join("\n\n")}
-        />
+        <>
+          {tab === "markdown" ? (
+            <MarkdownEditor
+              markdown={field.value}
+              onCodeChange={field.onChange}
+              {...field}
+            />
+          ) : null}
+          {tab === "preview" ? (
+            <MarkdownPreview code={String(field.value)} />
+          ) : null}
+        </>
       </FormControl>
       <FormMessage />
     </FormItem>

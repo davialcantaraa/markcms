@@ -30,28 +30,30 @@ export default async function Page({ params }: Props) {
   useModelStore.setState({ model: model.data })
 
   return (
-    <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
-      <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
-        <div className="flex">
-          <Link
-            href="/content"
-            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
-          >
-            <Icons.arrowLeft />
-          </Link>
-          <div>
-            <h3 className="text-slate-12 text-[28px] font-bold leading-[34px] tracking-[-0.416px]">
-              {model.data.name}
-            </h3>
-            <p className="text-muted-foreground">{model.data.description}</p>
-          </div>
-        </div>
-        <CreateField />
-      </div>
-      <div className="mx-auto max-w-5xl px-6">
-        <ContentTable />
-      </div>
+    <>
       <ModelStoreInitializer model={model.data} />
-    </main>
+      <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
+        <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
+          <div className="flex">
+            <Link
+              href="/content"
+              className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            >
+              <Icons.arrowLeft />
+            </Link>
+            <div>
+              <h3 className="text-slate-12 text-[28px] font-bold leading-[34px] tracking-[-0.416px]">
+                {model.data.name}
+              </h3>
+              <p className="text-muted-foreground">{model.data.description}</p>
+            </div>
+          </div>
+          <CreateField />
+        </div>
+        <div className="mx-auto max-w-5xl px-6">
+          <ContentTable />
+        </div>
+      </main>
+    </>
   )
 }

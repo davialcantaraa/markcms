@@ -31,3 +31,13 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.hljs-keyword,
+.hljs-comment,
+.hljs-title,
+.hljs-function,
+.hljs-attr,
+.hljs-attribute,
+.hljs-section {
+  @apply text-muted-foreground;
+}

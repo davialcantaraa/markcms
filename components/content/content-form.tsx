@@ -21,7 +21,7 @@ export const ContentForm = () => {
   const form = useForm({
     defaultValues: content.model?.fields.reduce((acc, item) => {
       // @ts-ignore
-      acc[item.name.toLowerCase()] = content.raw_data?.[item.name.toLowerCase()]
+      acc[item.name.toLowerCase()] = content.raw_data?.[item.name.toLowerCase()] ?? ''
       return acc
     }, {}),
   })

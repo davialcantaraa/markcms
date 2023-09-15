@@ -2,7 +2,7 @@ import copy from "copy-to-clipboard"
 import { AnimatePresence, MotionConfig, motion } from "framer-motion"
 import { useCallback, useState } from "react"
 
-import "@/styles/editor.css"
+import "@/styles/markdown.css"
 
 interface Props {
   value: string
