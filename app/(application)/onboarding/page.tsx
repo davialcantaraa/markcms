@@ -1,5 +1,4 @@
-import { Lock } from "lucide-react"
-
+import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 
 export default function Page() {
@@ -22,7 +21,7 @@ export default function Page() {
             Use the following generated key to authenticate requests
           </p>
           <Button className="flex items-center gap-2">
-            <Lock width={16} /> Add API Key
+            <Icons.lock width={16} /> Add API Key
           </Button>
         </div>
         <div className="p-6 opacity-50">
@@ -33,7 +32,7 @@ export default function Page() {
             Use the following generated key to authenticate requests
           </p>
           <Button className="flex items-center gap-2">
-            <Lock width={16} /> Create content
+            <Icons.lock width={16} /> Create content
           </Button>
         </div>
       </div>

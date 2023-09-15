@@ -1,15 +1,17 @@
-'use client'
+"use client"
 
-import { ContentField } from "@prisma/client"
+import { Content, ContentField } from "@prisma/client"
 
 import { Checkbox } from "../ui/checkbox"
+import { ContentMarkdownSheet } from "./content-markdown-sheet"
 
 interface Props {
   type: ContentField
   value: any
+  content: Content
 }
 
-export const TableField = ({ type, value }: Props) => {
+export const TableField = ({ type, value, content }: Props) => {
   switch (type) {
     case ContentField.TEXT:
       return <span>{value}</span>
@@ -27,5 +29,7 @@ export const TableField = ({ type, value }: Props) => {
       return <a href={value}>{value}</a>
     case ContentField.DATE:
       return <time>{value}</time>
+    case ContentField.MARKDOWN:
+      return <ContentMarkdownSheet markdown={value} content={content} />
   }
 }

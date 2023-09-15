@@ -1,19 +1,28 @@
 "use client"
 
-import Editor, { OnMount } from "@monaco-editor/react"
+import Editor, { EditorProps, OnMount } from "@monaco-editor/react"
 import { useTheme } from "next-themes"
 
 import "@/styles/markdown.css"
 
 import { monacoInstanceType } from "@/types"
+import React from "react"
 
+import { cn } from "@/lib/utils"
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   markdown: string
   onCodeChange: (value: string) => void
+  editorProps?: EditorProps
 }
 
-export const MarkdownEditor = ({ markdown, onCodeChange }: Props) => {
+export const MarkdownEditor = ({
+  markdown,
+  onCodeChange,
+  className,
+  editorProps,
+  ...props
+}: Props) => {
   const { theme } = useTheme()
 
   const editorMount: OnMount = (editorL: monacoInstanceType) => {
@@ -25,13 +34,20 @@ export const MarkdownEditor = ({ markdown, onCodeChange }: Props) => {
   }
 
   return (
-    <div className="relative flex h-96 w-full rounded-md border border-input bg-transparent">
+    <div
+      className={cn(
+        "relative flex h-96 w-full rounded-md border border-input bg-transparent",
+        className
+      )}
+      {...props}
+    >
       <Editor
         language="markdown"
         value={markdown}
         onMount={editorMount}
         theme={theme === "dark" ? "vs-dark" : "vs-light"}
         onChange={handleEditorChange}
+        {...editorProps}
         options={{
           minimap: {
             enabled: false,
@@ -39,6 +55,9 @@ export const MarkdownEditor = ({ markdown, onCodeChange }: Props) => {
           wordWrap: "on",
           wrappingIndent: "indent",
           scrollBeyondLastLine: false,
+          stickyScroll: {
+            enabled: true,
+          },
           scrollbar: {
             vertical: "hidden",
             horizontal: "hidden",
@@ -53,12 +72,13 @@ export const MarkdownEditor = ({ markdown, onCodeChange }: Props) => {
           fontSize: 14,
           padding: {
             top: 24,
-            bottom: 650,
+            bottom: 24,
           },
           cursorBlinking: "smooth",
           dragAndDrop: true,
+          ...editorProps?.options,
         }}
-        className="px-6"
+        className={cn("px-6", editorProps?.className)}
       />
     </div>
   )

@@ -1,5 +1,5 @@
-import { MessageSquare } from "lucide-react"
 
+import { Icons } from "../icons"
 import { Button } from "../ui/button"
 
 export const ApplicationHeader = () => {
@@ -8,7 +8,7 @@ export const ApplicationHeader = () => {
       <div className="flex h-16 justify-end">
         <nav className="flex items-center gap-2">
           <Button className="flex items-center gap-1">
-            <MessageSquare width={16} />
+            <Icons.chat width={16} />
             Feedback
           </Button>
         </nav>

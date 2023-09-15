@@ -5,9 +5,12 @@ import {
   CalendarIcon,
   Code,
   Component,
+  FileText,
   Home,
   Loader2,
+  Lock,
   LucideProps,
+  MessageSquare,
   Moon,
   MoreVertical,
   Pen,
@@ -37,6 +40,9 @@ export const Icons = {
   dots: DotsHorizontalIcon,
   calendar: CalendarIcon,
   api: Code,
+  file: FileText,
+  lock: Lock,
+  chat: MessageSquare,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

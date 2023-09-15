@@ -10,12 +10,14 @@ import { toast } from "sonner"
 
 import { updateContentById } from "@/lib/api/update-content-by-id"
 
+import { useState } from "react"
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
 import { Form, FormField as PrimitiveFormField } from "../ui/form"
 import { FormField } from "./content-form-field"
 
 export const ContentForm = () => {
+  const [beforeUnloadEnable, setBeforeUnloadEnable] = useState(true);
   const { content } = useContentStore()
   const router = useRouter()
   const form = useForm({
@@ -26,12 +28,13 @@ export const ContentForm = () => {
     }, {}),
   })
 
-  useBeforeUnload(true, "You sure?")
+  useBeforeUnload(beforeUnloadEnable, "You sure?")
 
   const updateContentMutation = useMutation({
     mutationKey: ["update-content"],
     mutationFn: updateContentById,
     onSuccess: (response) => {
+      setBeforeUnloadEnable(false)
       toast.success(response.data.message)
       router.push(`/content/model/${content.model_id}`)
       queryClient.invalidateQueries(["get-contents", "get-fields"])

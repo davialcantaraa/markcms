@@ -4,7 +4,6 @@ import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
-import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useToggle } from "react-use"
 import { toast } from "sonner"
@@ -123,7 +122,7 @@ export const CreateModel = () => {
                 disabled={createContentModelMutation.isLoading}
               >
                 {createContentModelMutation.isLoading && (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 Create model
               </Button>

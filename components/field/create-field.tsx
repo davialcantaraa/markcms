@@ -6,7 +6,6 @@ import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ContentField } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
-import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useToggle } from "react-use"
 import { toast } from "sonner"
@@ -144,7 +143,7 @@ export const CreateField = () => {
             <DialogFooter>
               <Button type="submit" disabled={createFieldMutation.isLoading}>
                 {createFieldMutation.isLoading && (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
                 Create field
               </Button>

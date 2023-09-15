@@ -102,9 +102,10 @@ export function ContentTable() {
       header: () => <EditField field={item} />,
       cell: ({ row }) => {
         const value: string = row.getValue(item.name.toLowerCase())
+        const content: Content = row.original
         return (
           <div className="ml-3 max-w-[200px] truncate">
-            {TableField({ type: item.type, value })}
+            {TableField({ type: item.type, value, content: content })}
           </div>
         )
       },
