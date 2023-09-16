@@ -15,7 +15,7 @@ model Content {
 
   model    ContentModel? @relation(fields: [model_id], references: [id])
   model_id String?
-  raw_data         Json
+  raw_data Json
 
   @@map("content")
 }
@@ -36,16 +36,35 @@ model ContentModel {
 
 model Field {
   id         String   @id @default(uuid())
-  creator_id String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  name       String
+  creator_id String
 
+  name     String
   type     ContentField
   model    ContentModel @relation(fields: [model_id], references: [id])
   model_id String
 
   @@map("field")
+}
+
+model ApiKey {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  last_used  DateTime?
+  creator_id String
+
+  name       String
+  permission ApiPermisson
+  model      String
+  uses       Int          @default(0)
+
+  token String @unique
+}
+
+enum ApiPermisson {
+  FULL_ACCESS
+  READ_ONLY
 }
 
 enum ContentField {
