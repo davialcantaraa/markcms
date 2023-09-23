@@ -10,7 +10,6 @@ const schema = z.object({
   name: z.string().min(2).max(50),
   permission: z.nativeEnum(ApiPermisson),
   model: z.string().uuid().or(z.literal("all")),
-  user_id: z.string().min(2),
 })
 
 export async function POST(request: Request) {
@@ -33,12 +32,12 @@ export async function POST(request: Request) {
     }
 
     const {
-      data: { model, name, permission, user_id },
+      data: { model, name, permission },
     } = validation
 
     const key = await db.apiKey.create({
       data: {
-        creator_id: user_id,
+        creator_id: userId,
         model,
         name,
         permission,

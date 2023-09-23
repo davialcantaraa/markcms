@@ -7,7 +7,6 @@ import { http } from "./http"
 
 const schema = z.object({
   name: z.string().min(2).max(50),
-  user_id: z.string().uuid(),
   model_id: z.string().uuid(),
   type: z.nativeEnum(ContentField),
 })

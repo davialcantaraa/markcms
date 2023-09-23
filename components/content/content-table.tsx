@@ -53,19 +53,19 @@ export function ContentTable() {
   function getColumns(fields: Field[]): ColumnDef<any>[] {
     const mainFields: ColumnDef<any>[] = [
       {
-        accessorKey: "created_at",
-        header: "Created at",
-        cell: ({ row }) => {
-          const created_at: string = row.getValue("created_at")
-          return format(new Date(created_at), "dd/MM/yyyy")
-        },
-      },
-      {
         accessorKey: "updated_at",
         header: "Last update",
         cell: ({ row }) => {
           const updated_at: string = row.getValue("updated_at")
           return format(new Date(updated_at), "dd/MM/yyyy")
+        },
+      },
+      {
+        accessorKey: "created_at",
+        header: "Created at",
+        cell: ({ row }) => {
+          const created_at: string = row.getValue("created_at")
+          return format(new Date(created_at), "dd/MM/yyyy")
         },
       },
       {

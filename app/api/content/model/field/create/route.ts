@@ -7,7 +7,6 @@ import { db } from "@/lib/prisma"
 
 const schema = z.object({
   name: z.string().min(2).max(50),
-  user_id: z.string().min(2),
   model_id: z.string().uuid(),
   type: z.nativeEnum(ContentField),
 })
@@ -32,12 +31,12 @@ export async function POST(request: Request) {
     }
 
     const {
-      data: { model_id, type, user_id, name },
+      data: { model_id, type, name },
     } = validation
 
     await db.field.create({
       data: {
-        creator_id: user_id,
+        creator_id: userId,
         model_id,
         type,
         name,

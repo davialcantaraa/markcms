@@ -78,7 +78,6 @@ export const CreateField = () => {
     if (!user.isSignedIn) return
     createFieldMutation.mutate({
       ...values,
-      user_id: user.userId,
       model_id: model.id,
     })
   }

@@ -5,7 +5,6 @@ import { z } from "zod"
 import { db } from "@/lib/prisma"
 
 const schema = z.object({
-  user_id: z.string().min(2),
   model_id: z.string().uuid(),
 })
 
@@ -29,20 +28,20 @@ export async function POST(request: Request) {
     }
 
     const {
-      data: { model_id, user_id },
+      data: { model_id },
     } = validation
 
     const content = await db.$transaction(async (ctx) => {
       const fields = await ctx.field.findMany({
         where: {
-          creator_id: user_id,
+          creator_id: userId,
           model_id,
         },
       })
 
       return await ctx.content.create({
         data: {
-          creator_id: user_id,
+          creator_id: userId,
           model_id,
           raw_data: fields.map((item) => ({
             [item.name.toLocaleLowerCase()]: "",

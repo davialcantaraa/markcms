@@ -69,7 +69,6 @@ export const CreateModel = () => {
     if (!user.isSignedIn) return
     createContentModelMutation.mutate({
       ...values,
-      user_id: user.userId,
     })
   }
 

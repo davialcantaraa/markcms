@@ -5,7 +5,6 @@ import { SuccessResponse } from "@/types/api"
 import { http } from "./http"
 
 const schema = z.object({
-  user_id: z.string(),
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(50),
 })

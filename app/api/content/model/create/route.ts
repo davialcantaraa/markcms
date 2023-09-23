@@ -5,7 +5,6 @@ import { z } from "zod"
 import { db } from "@/lib/prisma"
 
 const schema = z.object({
-  user_id: z.string(),
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(50),
 })
@@ -30,12 +29,12 @@ export async function POST(request: Request) {
     }
 
     const {
-      data: { name, description, user_id },
+      data: { name, description },
     } = validation
 
     await db.contentModel.create({
       data: {
-        creator_id: user_id,
+        creator_id: userId,
         description,
         name,
       },

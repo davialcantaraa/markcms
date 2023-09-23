@@ -37,7 +37,6 @@ export const CreateContent = ({ model }: Props) => {
   function handleCreateContent() {
     if (!user.isSignedIn) return
     createContentMutation.mutate({
-      user_id: user.userId,
       model_id: model.id,
       raw_data: {},
     })

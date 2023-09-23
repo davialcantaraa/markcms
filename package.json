@@ -47,6 +47,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "copy-to-clipboard": "^3.3.3",
+    "crypto-js": "^4.1.1",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "highlight.js": "^11.8.0",
