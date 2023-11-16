@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Content {
+  id         String   @id @default(uuid())
+  creator_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  model    ContentModel? @relation(fields: [model_id], references: [id], onDelete: Cascade)
+  model_id String?
+  raw_data Json
+
+  @@map("content")
+}
+
+model ContentModel {
+  id         String   @id @default(uuid())
+  creator_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name        String
+  description String
+  content     Content[]
+  fields      Field[]
+
+  @@map("content-model")
+}
+
+model Field {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  creator_id String
+
+  name     String
+  type     ContentField
+  model    ContentModel @relation(fields: [model_id], references: [id], onDelete: Cascade)
+  model_id String
+
+  @@map("field")
+}
+
+model ApiKey {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  last_used  DateTime?
+  creator_id String
+
+  name       String
+  permission ApiPermisson
+  model      String
+  uses       Int          @default(0)
+
+  token String @unique
+
+  @@map("api-key")
+}
+
+model Log {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  creator_id String
+
+  method   Method
+  endpoint String
+  status   Int
+  request  Json
+  response Json
+
+  @@map("log")
+}
+
+enum ApiPermisson {
+  FULL_ACCESS
+  READ_ONLY
+}
+
+enum Method {
+  GET
+  POST
+  DELETE
+  PUT
+  PATCH
+}
+
+enum ContentField {
+  TEXT
+  MARKDOWN
+  DATE
+  NUMBER
+  CHECKBOX
+  EMAIL
+  URL
+  PHONE
+}

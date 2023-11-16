@@ -1,0 +1,3 @@
+GET http://localhost:3000/api/v1/models
+content-type: application/json
+# Authorization: Bearer cms_hFwWxnb2Ly8OiJLR911Q1RhGs8bh4Y1r8y2rtBdUMw
