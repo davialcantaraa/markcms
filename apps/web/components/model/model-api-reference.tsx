@@ -2,11 +2,12 @@
 
 import { useModelStore } from "@/stores/model-store"
 
-import { MODEL_API_REFERENCE } from "@/config/model-api-reference"
+import { MODEL_API_REFERENCE } from "@/config/api-references/model-api-reference"
 
 import { Icons } from "../icons"
 import { MarkdownPreview } from "../markdown/markdown-preview"
 import { Button } from "../ui/button"
+import { ScrollArea } from "../ui/scroll-area"
 import {
   Sheet,
   SheetContent,
@@ -23,43 +24,52 @@ export const ModelApiReference = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="secondary">
+        <Button variant="fancy">
           <Icons.api className="mr-2 h-4 w-4" />
           API
         </Button>
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader className="px-6">
+      <SheetContent className="w-1/2 max-w-none">
+        <SheetHeader>
           <SheetTitle>Model API Reference</SheetTitle>
           <SheetDescription>
             Reference for <b>{model.name}</b> model
           </SheetDescription>
         </SheetHeader>
-        {MODEL_API_REFERENCE.sections.map((section) => (
-          <div key={section.title} className="py-8">
-            <h4 className="scroll-m-20 text-xl font-semibold tracking-tight pb-4">
-              {section.title}
-            </h4>
-            <p className="leading-7 pb-4">
-              {section.description}
-            </p>
-            <Tabs defaultValue="account">
-              <TabsList>
+        <ScrollArea
+          className="reference-sheet-scroll-area h-screen w-full overflow-x-scroll pb-16"
+        >
+          {MODEL_API_REFERENCE.sections.map((section) => (
+            <div key={section.title} className="py-6">
+              <h4 className="scroll-m-20 pb-4 text-xl font-semibold tracking-tight">
+                {section.title}
+              </h4>
+              <p className="text-sm font-medium leading-none">
+                {section.description}
+              </p>
+              <Tabs
+                defaultValue={section.codeOptions[0].value}
+                className="mt-4"
+              >
+                <TabsList className="w-fit">
+                  {section.codeOptions.map((option) => (
+                    <TabsTrigger value={option.value}>
+                      {option.title}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
                 {section.codeOptions.map((option) => (
-                  <TabsTrigger value={option.value}>{option.title}</TabsTrigger>
+                  <TabsContent value={option.value}>
+                    <MarkdownPreview
+                      code={option.generateCode(model.id)}
+                      className="h-fit border-t border-none px-0"
+                    />
+                  </TabsContent>
                 ))}
-              </TabsList>
-              {section.codeOptions.map((option) => (
-                <TabsContent value={option.value}>
-                  <MarkdownPreview
-                    code={option.generateCode(model.id)}
-                    className="border-none border-t px-0"
-                  />
-                </TabsContent>
-              ))}
-            </Tabs>
-          </div>
-        ))}
+              </Tabs>
+            </div>
+          ))}
+        </ScrollArea>
       </SheetContent>
     </Sheet>
   )

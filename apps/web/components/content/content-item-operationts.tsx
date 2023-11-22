@@ -93,6 +93,7 @@ export const ContentItemOperations = ({ content }: Props) => {
                 e.preventDefault()
                 deleteContentMutation.mutate(content.id)
               }}
+              disabled={deleteContentMutation.isLoading}
               className="bg-red-500 focus:ring-red-500"
             >
               {deleteContentMutation.isLoading ? (

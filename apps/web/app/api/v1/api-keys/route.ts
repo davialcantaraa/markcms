@@ -29,7 +29,7 @@ export async function GET() {
         },
         data: {
           last_used: new Date(),
-          uses: validKey.uses++,
+          uses: validKey.uses + 1,
         },
       })
 

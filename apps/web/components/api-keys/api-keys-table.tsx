@@ -8,7 +8,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { format } from "date-fns"
+import { formatDistance } from "date-fns"
 import Link from "next/link"
 
 import {
@@ -23,16 +23,8 @@ import { getApiKeys } from "@/lib/api/get-api-keys"
 import { capitalizeFirstLetter } from "@/lib/utils"
 
 import { ApiKeysEmptyState } from "../empty-states/api-keys-empty-state"
-import { Icons } from "../icons"
 import { ModelItem } from "../model/model-item"
-import { Button } from "../ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
+import { ApiKeyOperations } from "./api-key-operations"
 import { ApiKeyToken } from "./api-key-token"
 
 export const columns: ColumnDef<ApiKey>[] = [
@@ -72,7 +64,9 @@ export const columns: ColumnDef<ApiKey>[] = [
     cell: ({ row }) => {
       const last_used: string = row.getValue("last_used")
       if (!last_used) return "Never used"
-      return format(new Date(last_used), "dd/MM/yyyy")
+      return formatDistance(new Date(last_used), new Date(), {
+        addSuffix: true,
+      })
     },
   },
   {
@@ -80,30 +74,18 @@ export const columns: ColumnDef<ApiKey>[] = [
     header: "Created at",
     cell: ({ row }) => {
       const created_at: string = row.getValue("created_at")
-      return format(new Date(created_at), "dd/MM/yyyy")
+      return formatDistance(new Date(created_at), new Date(), {
+        addSuffix: true,
+      })
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <Icons.dots className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Share</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-500 hover:text-red-500">
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+      const apiKey = row.original
+
+      return <ApiKeyOperations apiKey={apiKey} />
     },
   },
 ]

@@ -4,6 +4,7 @@ import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
+import { revalidatePath } from "next/cache"
 import { useForm } from "react-hook-form"
 import { useToggle } from "react-use"
 import { toast } from "sonner"
@@ -48,21 +49,23 @@ export const CreateModel = () => {
 
   const user = useAuth()
 
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+  })
+
   const createContentModelMutation = useMutation({
     mutationKey: ["create-content-model"],
     mutationFn: createModel,
     onSuccess: async (response) => {
       toast.success(response.data.message)
       queryClient.invalidateQueries(["get-models"])
+      form.reset()
       toggle()
+      revalidatePath("/onboarding")
     },
     onError: (error: ErrorResponse) => {
       toast.error(error.response?.data.message)
     },
-  })
-
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
   })
 
   function onSubmit(values: z.infer<typeof schema>) {

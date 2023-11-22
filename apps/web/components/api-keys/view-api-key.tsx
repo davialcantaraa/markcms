@@ -26,8 +26,8 @@ export const ViewApiKey = () => {
         </DialogHeader>
         <div className="flex flex-col gap-6">
           <Alert variant="warning">
-            <Icons.warning className="h-4 w-4" />
-            <AlertDescription>
+            <AlertDescription className="flex items-center gap-2">
+              <Icons.warning className="h-4 w-4" />
               You can only see this key once. Store it safely.
             </AlertDescription>
           </Alert>

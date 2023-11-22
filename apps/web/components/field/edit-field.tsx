@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ContentField, Field } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
+import { AlertCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useToggle } from "react-use"
 import { toast } from "sonner"
@@ -22,6 +23,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -33,6 +35,17 @@ import { capitalizeFirstLetter } from "@/lib/utils"
 import { ErrorResponse } from "@/types/api"
 
 import { Icons } from "../icons"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import {
@@ -55,6 +68,7 @@ interface Props {
 const FIELDS = Object.values(ContentField)
 
 export const EditField = ({ field }: Props) => {
+  const [showDeleteDialog, toggleDeleteDialog] = useToggle(false)
   const [open, toggle] = useToggle(false)
 
   const user = useAuth()
@@ -154,22 +168,64 @@ export const EditField = ({ field }: Props) => {
                       ))}
                     </SelectContent>
                   </Select>
+                  <FormDescription className="flex items-center gap-2">
+                    <AlertCircle size={24} />
+                    Editing the field type also deletes its content. This action
+                    cannot be undone.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <DialogFooter>
-              <Button
-                variant="secondary"
-                disabled={deleteFieldMutation.isLoading}
+              <AlertDialog
+                open={showDeleteDialog}
+                onOpenChange={toggleDeleteDialog}
               >
-                {deleteFieldMutation.isLoading ? (
-                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Icons.trash className="mr-2 h-4 w-4" />
-                )}
-                Delete field
-              </Button>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    type="button"
+                    className="text-red-500"
+                    disabled={deleteFieldMutation.isLoading}
+                  >
+                    {deleteFieldMutation.isLoading ? (
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <Icons.trash className="mr-2 h-4 w-4" />
+                    )}
+                    Delete field
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you sure you want to delete this field?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="text-destructive">
+                      Deleting this field also deletes its content. This action
+                      cannot be undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={(e) => {
+                        e.preventDefault()
+                        deleteFieldMutation.mutate(field.id)
+                      }}
+                      className="bg-red-500 focus:ring-red-500"
+                    >
+                      {deleteFieldMutation.isLoading ? (
+                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <Icons.trash className="mr-2 h-4 w-4" />
+                      )}
+                      <span>Delete</span>
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
               <Button type="submit" disabled={editFieldMutation.isLoading}>
                 {editFieldMutation.isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />

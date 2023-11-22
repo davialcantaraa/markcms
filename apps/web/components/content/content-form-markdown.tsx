@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 
+import { capitalizeFirstLetter } from "@/lib/utils"
 import { MarkdownEditor } from "../markdown/markdown-editor"
 import { MarkdownPreview } from "../markdown/markdown-preview"
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form"
@@ -17,7 +18,7 @@ export const ContentFormMarkdown = ({ field }: Props) => {
   return (
     <FormItem>
       <div className="flex justify-between">
-        <FormLabel>{field.name}</FormLabel>
+        <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
         <Tabs defaultValue="markdown" value={tab} onValueChange={setTab}>
           <TabsList>
             <TabsTrigger value="markdown">Markdown</TabsTrigger>

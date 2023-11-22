@@ -92,9 +92,9 @@ export const CreateField = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add a new field</DialogTitle>
+          <DialogTitle>Add model field</DialogTitle>
           <DialogDescription>
-            Add a new field to your <b>{model.name}</b> model.
+            Add a new field to <b>{model.name}</b> model.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -140,6 +140,15 @@ export const CreateField = () => {
               )}
             />
             <DialogFooter>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  form.reset()
+                  toggle()
+                }}
+              >
+                Cancel
+              </Button>
               <Button type="submit" disabled={createFieldMutation.isLoading}>
                 {createFieldMutation.isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />

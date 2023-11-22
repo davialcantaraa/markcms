@@ -5,64 +5,47 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
-
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
-
-    --primary: 24 9.8% 10%;
-    --primary-foreground: 60 9.1% 97.8%;
-
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
-
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
-
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 20 14.3% 4.1%;
-
-    --radius: 0.5rem;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
-
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
-
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
-
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
-
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
-
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 24 5.7% 82.9%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
   }
 }
 
@@ -78,11 +61,125 @@
 @layer utilities {
   @variants responsive {
     .no-scrollbar::-webkit-scrollbar {
-        display: none;
+      display: none;
     }
 
     .no-scrollbar {
-        scrollbar-width: none;
+      scrollbar-width: none;
     }
   }
+}
+
+.reference-sheet-scroll-area div[data-radix-scroll-area-viewport] div {
+  display: block !important;
+}
+
+.gradient-box {
+  box-shadow: 0px 0px 20px 0px rgba(20, 20, 20, 0.1) inset;
+  position: relative;
+  background: conic-gradient(
+    from calc(var(--r2) - 80deg) at var(--x) 20px,
+    #fff 0%,
+    #000 20%,
+    #fff 25%
+  );
+  animation:
+    -0.64s rotating2 2s linear infinite,
+    -0.64s x 2s linear infinite;
+}
+
+.gradient-box::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(to right, rgba(20, 20, 20, 0.4), hsl(0 0% 14.2%)) border-box;
+  inset: 1.5px;
+  border-radius: 45px;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+@property --r {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --r2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes x {
+  0% {
+    --x: 20px;
+  }
+  100% {
+    --x: 20px;
+  }
+}
+
+@keyframes rotating2 {
+  0% {
+    --r2: 0deg;
+  }
+  100% {
+    --r2: 360deg;
+  }
+}
+
+.fancy-button {
+  border: none;
+  background: linear-gradient(156deg, #fff, #f0f0f0);
+  flex-shrink: 0;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 1px 0 0 rgba(0, 0, 0, 0.08),
+    0 2px 2px 0 rgba(0, 0, 0, 0.04),
+    0 3px 3px 0 rgba(0, 0, 0, 0.02),
+    0 4px 4px 0 rgba(0, 0, 0, 0.01);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: #171717;
+}
+
+.fancy-button::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  background: blue;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(
+    0deg,
+    #e8e8e8 0,
+    hsla(0, 0%, 91%, 0.987) 8.1%,
+    hsla(0, 0%, 91%, 0.951) 15.5%,
+    hsla(0, 0%, 91%, 0.896) 22.5%,
+    hsla(0, 0%, 91%, 0.825) 29%,
+    hsla(0, 0%, 91%, 0.741) 35.3%,
+    hsla(0, 0%, 91%, 0.648) 41.2%,
+    hsla(0, 0%, 91%, 0.55) 47.1%,
+    hsla(0, 0%, 91%, 0.45) 52.9%,
+    hsla(0, 0%, 91%, 0.352) 58.8%,
+    hsla(0, 0%, 91%, 0.259) 64.7%,
+    hsla(0, 0%, 91%, 0.175) 71%,
+    hsla(0, 0%, 91%, 0.104) 77.5%,
+    hsla(0, 0%, 91%, 0.049) 84.5%,
+    hsla(0, 0%, 91%, 0.013) 91.9%,
+    hsla(0, 0%, 91%, 0)
+  );
+  opacity: 0.6;
+  transition: transform 0.2s;
 }

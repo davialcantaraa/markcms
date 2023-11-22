@@ -1,5 +1,6 @@
 import { CreateModel } from "@/components/model/create-model"
 import { Models } from "@/components/model/models"
+import { ModelsApiReference } from "@/components/model/models-api-reference"
 
 export default async function Page() {
   return (
@@ -13,14 +14,12 @@ export default async function Page() {
             Create and manage content models.
           </p>
         </div>
+        <div className="flex items-center gap-2">
+          <CreateModel />
+          <ModelsApiReference />
+        </div>
       </div>
       <div className="mx-auto max-w-5xl px-6">
-        <div className="mb-4 flex items-center justify-between">
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            Models
-          </h3>
-          <CreateModel />
-        </div>
         <Models />
       </div>
     </main>

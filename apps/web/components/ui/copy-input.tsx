@@ -1,7 +1,8 @@
 "use client"
 
+import copy from "copy-to-clipboard"
+import { Check } from "lucide-react"
 import * as React from "react"
-import { useCopyToClipboard } from "react-use"
 
 import { cn } from "@/lib/utils"
 
@@ -19,7 +20,15 @@ export interface CopyInputProps
 
 const CopyInput = React.forwardRef<HTMLInputElement, CopyInputProps>(
   ({ className, type, value, ...props }, ref) => {
-    const [copied, copy] = useCopyToClipboard()
+    const [copying, setCopying] = React.useState<number>(0)
+
+    const onCopy = React.useCallback(() => {
+      copy(String(value))
+      setCopying((c) => c + 1)
+      setTimeout(() => {
+        setCopying((c) => c - 1)
+      }, 2000)
+    }, [value])
 
     return (
       <div className="relative flex items-center justify-end">
@@ -40,9 +49,9 @@ const CopyInput = React.forwardRef<HTMLInputElement, CopyInputProps>(
                 variant="secondary"
                 className="absolute mr-1"
                 size="sm"
-                onClick={() => copy(String(value))}
+                onClick={onCopy}
               >
-                <Icons.copy size={16} />
+                {copying ? <Check size={16} /> : <Icons.copy size={16} />}
               </Button>
             </TooltipTrigger>
             <TooltipContent>Copy to clipboard</TooltipContent>

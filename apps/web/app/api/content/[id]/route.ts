@@ -11,7 +11,7 @@ interface Params {
 }
 
 const updateContentSchema = z.object({
-  id: z.string().uuid(),
+  content_id: z.string().uuid(),
   raw_data: z.record(z.any()),
 })
 

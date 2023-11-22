@@ -10,7 +10,7 @@ export async function GET() {
 
     const token = extractToken(String(headerList.get("Authorization")))
 
-    if (!token) return NextResponse.json("Unauthorized", { status: 401 })
+    if (!token) return NextResponse.json("API key missing", { status: 401 })
 
     const models = await db.$transaction(async (ctx) => {
       const validKey = await ctx.apiKey.findFirst({
@@ -23,13 +23,19 @@ export async function GET() {
         return null
       }
 
+      const keyHasPermission = validKey?.model === "all"
+
+      if (!keyHasPermission) {
+        return null
+      }
+
       await db.apiKey.update({
         where: {
           id: validKey.id,
         },
         data: {
           last_used: new Date(),
-          uses: validKey.uses++,
+          uses: validKey.uses + 1,
         },
       })
 
@@ -42,7 +48,7 @@ export async function GET() {
       return models
     })
 
-    if (!models) return NextResponse.json("Unauthorized", { status: 401 })
+    if (!models) return NextResponse.json("Invalid API key", { status: 401 })
 
     return NextResponse.json(models, { status: 200 })
   } catch (error) {

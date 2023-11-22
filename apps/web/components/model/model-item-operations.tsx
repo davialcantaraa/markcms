@@ -81,6 +81,7 @@ export function ModelItemOperations({ model }: ModelItemOperationsProps) {
     onSuccess: async (response) => {
       toast.success(response.data.message)
       queryClient.invalidateQueries(["get-models"])
+      toggleDeleteDialog()
     },
     onError: (error: ErrorResponse) => {
       toast.error(error.response?.data.message)
@@ -138,10 +139,11 @@ export function ModelItemOperations({ model }: ModelItemOperationsProps) {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Are you sure you want to delete this model?
+              Are you sure you want to delete the <b>{model.name}</b> model?
             </AlertDialogTitle>
             <AlertDialogDescription className="text-destructive">
-              This action cannot be undone.
+              Deleting this model also deletes its contents. This action cannot
+              be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -151,6 +153,7 @@ export function ModelItemOperations({ model }: ModelItemOperationsProps) {
                 e.preventDefault()
                 deleteModelMutation.mutate(model.id)
               }}
+              disabled={deleteModelMutation.isLoading}
               className="bg-red-500 focus:ring-red-500"
             >
               {deleteModelMutation.isLoading ? (
@@ -166,7 +169,7 @@ export function ModelItemOperations({ model }: ModelItemOperationsProps) {
       <Dialog open={showEditDialog} onOpenChange={toggleEditDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit model</DialogTitle>
+            <DialogTitle>Edit content model</DialogTitle>
             <DialogDescription>
               Change name and description of <b>{model.name}</b>
             </DialogDescription>

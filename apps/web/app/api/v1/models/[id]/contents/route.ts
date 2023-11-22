@@ -17,7 +17,7 @@ export async function GET(_: Request, { params }: Params) {
 
     const token = extractToken(String(headerList.get("Authorization")))
 
-    if (!token) return NextResponse.json("Unauthorized", { status: 401 })
+    if (!token) return NextResponse.json("API key missing", { status: 401 })
 
     const isIdValid = z.string().uuid().safeParse(params.id)
     if (!isIdValid.success)
@@ -34,13 +34,19 @@ export async function GET(_: Request, { params }: Params) {
         return null
       }
 
+      const keyHasPermission = validKey?.model === params.id
+
+      if (!keyHasPermission) {
+        return null
+      }
+
       await db.apiKey.update({
         where: {
           id: validKey.id,
         },
         data: {
           last_used: new Date(),
-          uses: validKey.uses++,
+          uses: validKey.uses + 1,
         },
       })
 
@@ -53,7 +59,7 @@ export async function GET(_: Request, { params }: Params) {
       return contents
     })
 
-    if (!contents) return NextResponse.json("Unauthorized", { status: 401 })
+    if (!contents) return NextResponse.json("Invalid API key", { status: 401 })
 
     return NextResponse.json(contents, { status: 200 })
   } catch (error) {

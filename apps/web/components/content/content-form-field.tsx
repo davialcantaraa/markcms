@@ -35,7 +35,7 @@ export const FormField = ({ type, field }: Props) => {
     case ContentField.CHECKBOX:
       return (
         <FormItem>
-          <FormLabel>{field.name}</FormLabel>
+          <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
           <FormControl>
             <Switch
               checked={field.value}
@@ -49,7 +49,7 @@ export const FormField = ({ type, field }: Props) => {
     case ContentField.NUMBER:
       return (
         <FormItem>
-          <FormLabel>{field.name}</FormLabel>
+          <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
           <FormControl>
             <Input type="number" {...field} />
           </FormControl>
@@ -60,7 +60,7 @@ export const FormField = ({ type, field }: Props) => {
     case ContentField.EMAIL:
       return (
         <FormItem>
-          <FormLabel>{field.name}</FormLabel>
+          <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
           <FormControl>
             <Input type="email" {...field} />
           </FormControl>
@@ -70,7 +70,7 @@ export const FormField = ({ type, field }: Props) => {
     case ContentField.PHONE:
       return (
         <FormItem>
-          <FormLabel>{field.name}</FormLabel>
+          <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
           <FormControl>
             <Input type="tel" {...field} />
           </FormControl>
@@ -80,7 +80,7 @@ export const FormField = ({ type, field }: Props) => {
     case ContentField.URL:
       return (
         <FormItem>
-          <FormLabel>{field.name}</FormLabel>
+          <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
           <FormControl>
             <Input type="url" {...field} />
           </FormControl>
@@ -91,8 +91,8 @@ export const FormField = ({ type, field }: Props) => {
       return <ContentFormMarkdown field={field} />
     case ContentField.DATE:
       return (
-        <FormItem>
-          <FormLabel>{field.name}</FormLabel>
+        <FormItem className="flex flex-col gap-2">
+          <FormLabel>{capitalizeFirstLetter(field.name)}</FormLabel>
           <FormControl>
             <Popover>
               <PopoverTrigger asChild>

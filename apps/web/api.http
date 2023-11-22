@@ -1,3 +1,21 @@
 GET http://localhost:3000/api/v1/models
 content-type: application/json
-# Authorization: Bearer cms_hFwWxnb2Ly8OiJLR911Q1RhGs8bh4Y1r8y2rtBdUMw
+Authorization: Bearer cms_1oLutcdn5jH9I0qZG1XdtdHIVSUF6mIq3tH0ZmJMoIY
+
+###
+
+GET http://localhost:3000/api/v1/models/18e08978-f351-4f27-8843-51f0c8be9685
+content-type: application/json
+Authorization: Bearer cms_1oLutcdn5jH9I0qZG1XdtdHIVSUF6mIq3tH0ZmJMoIY
+
+###
+
+GET http://localhost:3000/api/v1/models/18e08978-f351-4f27-8843-51f0c8be9685/contents
+content-type: application/json
+Authorization: Bearer cms_1oLutcdn5jH9I0qZG1XdtdHIVSUF6mIq3tH0ZmJMoIY
+
+###
+
+GET http://localhost:3000/api/v1/models/18e08978-f351-4f27-8843-51f0c8be9685/fields
+content-type: application/json
+Authorization: Bearer cms_1oLutcdn5jH9I0qZG1XdtdHIVSUF6mIq3tH0ZmJMoIY

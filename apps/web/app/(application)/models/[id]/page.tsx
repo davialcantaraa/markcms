@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
         <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
           <div className="flex gap-2 items-center">
             <Link
-              href="/contents"
+              href="/models"
               className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
             >
               <Icons.arrowLeft />

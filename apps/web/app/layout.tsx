@@ -29,7 +29,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#171717",
+        },
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <head />
         <body

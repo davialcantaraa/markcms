@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ApiPermisson } from "@prisma/client"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
-import { useToggle } from "react-use"
+import { useToggle, useUpdateEffect } from "react-use"
 import { toast } from "sonner"
 import { z } from "zod"
 
@@ -71,6 +71,10 @@ export const CreateApiKey = () => {
   const { toggleOpen, setToken } = useApiKeyStore()
   const user = useAuth()
 
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+  })
+
   const createApiKeyMutation = useMutation({
     mutationKey: ["create-api-key"],
     mutationFn: createApiKey,
@@ -78,6 +82,7 @@ export const CreateApiKey = () => {
       toast.success(response.data.message)
       queryClient.invalidateQueries(["get-api-keys"])
       setToken(response.data.token)
+      form.reset()
       toggle()
       toggleOpen()
     },
@@ -91,16 +96,16 @@ export const CreateApiKey = () => {
     queryFn: getModels,
   })
 
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-  })
-
   function onSubmit(values: z.infer<typeof schema>) {
     if (!user.isSignedIn) return
     createApiKeyMutation.mutate({
       ...values,
     })
   }
+
+  useUpdateEffect(() => {
+    form.reset()
+  }, [open])
 
   return (
     <Dialog open={open} onOpenChange={toggle}>
@@ -149,11 +154,14 @@ export const CreateApiKey = () => {
                     </FormControl>
                     <SelectContent>
                       {models.data?.data.length ? (
-                        models.data?.data.map((item) => (
-                          <SelectItem key={item.id} value={item.id}>
-                            {item.name}
-                          </SelectItem>
-                        ))
+                        <>
+                          {models.data?.data.map((item) => (
+                            <SelectItem key={item.id} value={item.id}>
+                              {item.name}
+                            </SelectItem>
+                          ))}
+                          <SelectItem value="all">All models</SelectItem>
+                        </>
                       ) : (
                         <SelectItem value="loading" disabled>
                           Loading...
@@ -182,7 +190,7 @@ export const CreateApiKey = () => {
                     </FormControl>
                     <SelectContent>
                       {PERMISSIONS.map((item) => (
-                        <SelectItem key={item} value={item}>
+                        <SelectItem autoFocus key={item} value={item}>
                           {capitalizeFirstLetter(item.toLocaleLowerCase())
                             .split("_")
                             .join(" ")}
@@ -195,6 +203,15 @@ export const CreateApiKey = () => {
               )}
             />
             <DialogFooter>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  form.reset()
+                  toggle()
+                }}
+              >
+                Cancel
+              </Button>
               <Button type="submit" disabled={createApiKeyMutation.isLoading}>
                 {createApiKeyMutation.isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
