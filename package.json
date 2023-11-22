@@ -12,7 +12,8 @@
     "typecheck": "turbo run typecheck",
     "format:write": "turbo run format:write",
     "format:check": "turbo run format:check",
-    "check": "turbo lint typecheck format:check"
+    "check": "turbo lint typecheck format:check",
+    "postinstall": "turbo run postinstall"
   },
   "workspaces": [
     "apps/*"
