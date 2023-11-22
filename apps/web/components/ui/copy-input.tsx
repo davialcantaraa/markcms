@@ -1,5 +1,6 @@
 "use client"
 
+// @ts-ignore
 import copy from "copy-to-clipboard"
 import { Check } from "lucide-react"
 import * as React from "react"
