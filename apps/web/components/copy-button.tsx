@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+// @ts-ignore
 import copy from "copy-to-clipboard"
 import { AnimatePresence, MotionConfig, motion } from "framer-motion"
 import { useCallback, useState } from "react"

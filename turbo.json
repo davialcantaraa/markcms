@@ -14,7 +14,8 @@
     },
     "lint": {},
     "start": {},
-    "postinstall": {},
+    "typecheck": {},
+    "check": {},
     "dev": {
       "dependsOn": ["^db:generate"],
       "cache": false,
