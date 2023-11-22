@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs"
-import { ContentField } from "@prisma/client"
+import { ContentField } from "database"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 

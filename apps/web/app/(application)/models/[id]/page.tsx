@@ -1,6 +1,6 @@
 import { useModelStore } from "@/stores/model-store"
 import { ModelStoreInitializer } from "@/stores/model-store-initializer"
-import { ContentModel } from "@prisma/client"
+import { ContentModel } from "database"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { z } from "zod"
@@ -35,7 +35,7 @@ export default async function Page({ params }: Props) {
       <ModelStoreInitializer model={model.data} />
       <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
         <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <Link
               href="/models"
               className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}

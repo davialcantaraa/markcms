@@ -1,8 +1,8 @@
 "use client"
 
 import { queryClient } from "@/providers/app-provider"
-import { Content } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
+import { Content } from "database"
 import Link from "next/link"
 import { useToggle } from "react-use"
 import { toast } from "sonner"
@@ -12,22 +12,22 @@ import { ErrorResponse } from "@/types/api"
 
 import { Icons } from "../icons"
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
 } from "../ui/alert-dialog"
 import { Button } from "../ui/button"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 
 interface Props {

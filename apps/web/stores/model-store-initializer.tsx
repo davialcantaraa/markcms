@@ -1,6 +1,6 @@
 "use client"
 
-import { ContentModel } from "@prisma/client"
+import { ContentModel } from "database"
 import { useRef } from "react"
 
 import { useModelStore } from "./model-store"

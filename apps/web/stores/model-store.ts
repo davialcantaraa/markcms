@@ -1,4 +1,4 @@
-import { ContentModel } from "@prisma/client"
+import { ContentModel } from "database"
 import { create } from "zustand"
 
 type State = {

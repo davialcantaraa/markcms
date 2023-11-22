@@ -1,6 +1,6 @@
 "use client"
 
-import { Content } from "@prisma/client"
+import { Content } from "database"
 
 import { Icons } from "../icons"
 import { MarkdownEditor } from "../markdown/markdown-editor"
@@ -8,12 +8,12 @@ import { MarkdownPreview } from "../markdown/markdown-preview"
 import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
 } from "../ui/sheet"
 
 interface Props {

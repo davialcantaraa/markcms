@@ -1,6 +1,6 @@
 "use client"
 
-import { ContentField } from "@prisma/client"
+import { ContentField } from "database"
 import { format } from "date-fns"
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 

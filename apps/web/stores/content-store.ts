@@ -1,4 +1,4 @@
-import { Content, Field } from "@prisma/client"
+import { Content, Field } from "database"
 import { create } from "zustand"
 
 export interface ExtendedContent extends Content {

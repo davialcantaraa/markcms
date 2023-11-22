@@ -1,6 +1,6 @@
 import { useApiKeyStore } from "@/stores/api-key-store"
 import { ApiKeyStoreInitializer } from "@/stores/api-key-store-initializer"
-import { ContentModel } from "@prisma/client"
+import { ContentModel } from "database"
 import { formatDistance } from "date-fns"
 import Link from "next/link"
 import { notFound } from "next/navigation"

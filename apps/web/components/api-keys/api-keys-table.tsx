@@ -1,23 +1,23 @@
 "use client"
 
-import { ApiKey } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
 } from "@tanstack/react-table"
+import { ApiKey } from "database"
 import { formatDistance } from "date-fns"
 import Link from "next/link"
 
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table"
 import { getApiKeys } from "@/lib/api/get-api-keys"
 import { capitalizeFirstLetter } from "@/lib/utils"

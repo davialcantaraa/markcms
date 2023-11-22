@@ -1,6 +1,6 @@
 "use client"
 
-import { Content, ContentField } from "@prisma/client"
+import { Content, ContentField } from "database"
 import { format } from "date-fns"
 
 import { Checkbox } from "../ui/checkbox"

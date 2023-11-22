@@ -2,8 +2,8 @@
 
 import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
-import { ContentModel } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
+import { ContentModel } from "database"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 

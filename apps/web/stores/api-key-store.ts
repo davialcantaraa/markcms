@@ -1,4 +1,4 @@
-import { ApiKey } from "@prisma/client"
+import { ApiKey } from "database"
 import { create } from "zustand"
 
 type State = {

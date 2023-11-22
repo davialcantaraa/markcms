@@ -3,8 +3,8 @@
 import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ContentField, Field } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
+import { ContentField, Field } from "database"
 import { AlertCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useToggle } from "react-use"
@@ -12,22 +12,22 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog"
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form"
 import { deleteField } from "@/lib/api/delete-field-by-id"
 import { updateFieldById } from "@/lib/api/update-field-by-id"
@@ -36,24 +36,24 @@ import { ErrorResponse } from "@/types/api"
 
 import { Icons } from "../icons"
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
 } from "../ui/alert-dialog"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "../ui/select"
 
 const schema = z.object({

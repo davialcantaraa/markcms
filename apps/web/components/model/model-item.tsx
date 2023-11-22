@@ -1,4 +1,4 @@
-import { ContentModel } from "@prisma/client"
+import { ContentModel } from "database"
 import Link from "next/link"
 
 import { Skeleton } from "@/components/ui/skeleton"

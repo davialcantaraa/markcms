@@ -1,4 +1,4 @@
-import { ContentField } from "@prisma/client"
+import { ContentField } from "database"
 
 export interface IContent {}
 

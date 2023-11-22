@@ -1,5 +1,5 @@
-import { Field } from "@prisma/client"
 import { AxiosResponse } from "axios"
+import { Field } from "database"
 
 import { http } from "./http"
 

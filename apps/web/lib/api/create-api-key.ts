@@ -1,4 +1,4 @@
-import { ApiPermisson } from "@prisma/client"
+import { ApiPermisson } from "database"
 import { z } from "zod"
 
 import { SuccessTokenResponse } from "@/types/api"

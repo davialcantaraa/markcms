@@ -4,29 +4,29 @@ import { queryClient } from "@/providers/app-provider"
 import { useApiKeyStore } from "@/stores/api-key-store"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ApiPermisson } from "@prisma/client"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import { ApiPermisson } from "database"
 import { useForm } from "react-hook-form"
 import { useToggle, useUpdateEffect } from "react-use"
 import { toast } from "sonner"
 import { z } from "zod"
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog"
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form"
 import { createApiKey } from "@/lib/api/create-api-key"
 import { getModels } from "@/lib/api/get-models"
@@ -37,11 +37,11 @@ import { Icons } from "../icons"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "../ui/select"
 
 const schema = z.object({

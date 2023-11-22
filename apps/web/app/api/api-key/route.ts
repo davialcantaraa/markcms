@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs"
-import { ApiPermisson } from "@prisma/client"
+import { ApiPermisson } from "database"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 

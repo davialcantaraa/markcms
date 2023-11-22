@@ -1,4 +1,4 @@
-import { ContentField } from "@prisma/client"
+import { ContentField } from "database"
 import { z } from "zod"
 
 import { SuccessResponse } from "@/types/api"

@@ -1,5 +1,5 @@
-import { ContentModel } from "@prisma/client"
 import { AxiosResponse } from "axios"
+import { ContentModel } from "database"
 
 import { http } from "./http"
 

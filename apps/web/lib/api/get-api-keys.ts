@@ -1,5 +1,5 @@
-import { ApiKey } from "@prisma/client"
 import { AxiosResponse } from "axios"
+import { ApiKey } from "database"
 
 import { http } from "./http"
 

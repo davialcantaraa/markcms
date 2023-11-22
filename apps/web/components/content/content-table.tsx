@@ -2,24 +2,24 @@
 
 import { queryClient } from "@/providers/app-provider"
 import { useModelStore } from "@/stores/model-store"
-import { Content, Field } from "@prisma/client"
 import { useQuery } from "@tanstack/react-query"
 import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
 } from "@tanstack/react-table"
+import { Content, Field } from "database"
 import { format } from "date-fns"
 import { useState } from "react"
 
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table"
 import { getContentsByModelId } from "@/lib/api/get-contents-by-model-id"
 import { getFieldsByModelId } from "@/lib/api/get-fields-by-model-id"

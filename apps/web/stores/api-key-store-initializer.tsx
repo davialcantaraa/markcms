@@ -1,6 +1,6 @@
 "use client"
 
-import { ApiKey } from "@prisma/client"
+import { ApiKey } from "database"
 import { useRef } from "react"
 
 import { useApiKeyStore } from "./api-key-store"

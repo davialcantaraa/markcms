@@ -1,5 +1,5 @@
 import { ContentStoreInitializer } from "@/stores/content-store-initializer"
-import { Content } from "@prisma/client"
+import { Content } from "database"
 import { notFound } from "next/navigation"
 import { z } from "zod"
 

@@ -4,8 +4,6 @@
   "compilerOptions": {
     "target": "es5",
     "composite": false,
-    "declaration": true,
-    "declarationMap": true,
     "inlineSources": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
