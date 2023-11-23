@@ -11,20 +11,66 @@ import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: SITE_CONFIG.shortName,
     template: `%s - ${SITE_CONFIG.shortName}`,
   },
   description: SITE_CONFIG.description,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+  keywords: [
+    "Next.js",
+    "React",
+    "ClerkJS",
+    "Shadcn",
+    "Radix UI",
+    "Tailwind CSS",
+    "Server Components",
+    "Server Actions",
+    SITE_CONFIG.shortName,
+    "Markdown",
+    "Headless CMS",
+    "MDX",
+    "Markdown editor",
+    "MDX editor",
+    "Markdown preview",
+    "MDX preview",
   ],
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "white" }],
+  authors: [
+    {
+      name: SITE_CONFIG.creator.name,
+      url: SITE_CONFIG.creator.website,
+    },
+  ],
+  creator: SITE_CONFIG.creator.name,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_CONFIG.url,
+    title: SITE_CONFIG.shortName,
+    description: SITE_CONFIG.description,
+    siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: SITE_CONFIG.ogImage,
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.shortName,
+    description: SITE_CONFIG.description,
+    creator: "@davialcantaraa",
+  },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
+  manifest: "/manifest.json",
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
