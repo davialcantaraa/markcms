@@ -4,7 +4,6 @@ import { queryClient } from "@/providers/app-provider"
 import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
-import { revalidatePath } from "next/cache"
 import { useForm } from "react-hook-form"
 import { useToggle } from "react-use"
 import { toast } from "sonner"
@@ -61,7 +60,6 @@ export const CreateModel = () => {
       queryClient.invalidateQueries(["get-models"])
       form.reset()
       toggle()
-      revalidatePath("/onboarding")
     },
     onError: (error: ErrorResponse) => {
       toast.error(error.response?.data.message)

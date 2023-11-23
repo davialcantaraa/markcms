@@ -25,7 +25,7 @@ export default async function Page() {
       <section className="flex h-screen flex-col items-center justify-between space-y-6 pb-12 pt-16 lg:py-28">
         <div className="container flex max-w-[64rem] flex-col items-center gap-5 text-center">
           <Link
-            href="/"
+            href="/upcoming"
             className="gradient-box mt-4 rounded-full px-6 py-2.5 text-sm font-medium transition-transform hover:scale-105"
           >
             <span className="relative z-30">

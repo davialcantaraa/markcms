@@ -18,7 +18,7 @@ export async function sendEmail({ html, subject, to }: Props): Promise<{
   console.log(env.RESEND_API_KEY)
 
   const { data, error } = await resend.emails.send({
-    from: "Acme <markcms@davialcantara.dev>",
+    from: "MarkCMS <markcms@davialcantara.dev>",
     to,
     subject,
     html,

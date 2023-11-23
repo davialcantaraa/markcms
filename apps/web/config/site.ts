@@ -6,8 +6,8 @@ export const SITE_CONFIG = {
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.jpg`,
   description: "Open source markdown CMS.",
   links: {
-    twitter: "https://twitter.com/davialcantaa",
-    github: "https://github.com/davialcantaa/markcms",
+    twitter: "https://twitter.com/davialcantaraa",
+    github: "https://github.com/davialcantaraa/markcms",
   },
 }
 
