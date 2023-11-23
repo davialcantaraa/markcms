@@ -63,7 +63,16 @@ export async function GET(_: Request, { params }: Params) {
 
     if (!contents) return NextResponse.json("Invalid API key", { status: 401 })
 
-    return NextResponse.json(contents, { status: 200 })
+    const newContents = contents.map((content) => {
+      // @ts-ignore
+      const newContent = { ...content, ...content.raw_data }
+
+      delete newContent.raw_data
+
+      return newContent
+    })
+
+    return NextResponse.json(newContents, { status: 200 })
   } catch (error) {
     return NextResponse.json(
       { message: "Internal server error" },
