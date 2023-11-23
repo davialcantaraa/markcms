@@ -14,6 +14,7 @@ import { Input } from "../ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Switch } from "../ui/switch"
 import { ContentFormMarkdown } from "./content-form-markdown"
+import { ContentFormSelection } from "./content-form-selection"
 
 interface Props {
   type: ContentField
@@ -89,6 +90,8 @@ export const FormField = ({ type, field }: Props) => {
       )
     case ContentField.MARKDOWN:
       return <ContentFormMarkdown field={field} />
+    case ContentField.SELECTION:
+      return <ContentFormSelection field={field} />
     case ContentField.DATE:
       return (
         <FormItem className="flex flex-col gap-2">
@@ -105,7 +108,7 @@ export const FormField = ({ type, field }: Props) => {
                     )}
                   >
                     {field.value ? (
-                      format(field.value, "PPP")
+                      format(new Date(field.value), "PPP")
                     ) : (
                       <span>Pick a date</span>
                     )}

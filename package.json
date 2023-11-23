@@ -15,7 +15,9 @@
     "check": "turbo lint typecheck format:check"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*",
+    "examples/*"
   ],
   "devDependencies": {
     "eslint": "^8.48.0",
@@ -34,5 +36,11 @@
     "typescript": "^4.9.5"
   },
   "packageManager": "pnpm@8.9.0",
-  "name": "markcms"
+  "name": "markcms",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Davi Alcântara",
+    "url": "https://twitter.com/davialcantaraa"
+  }
 }

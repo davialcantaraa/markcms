@@ -39,6 +39,16 @@ Start the server
 - [Clerk](https://clerk.com/) – Auth
 - [Vercel](https://vercel.com/) – Hosting
 
+## Next steps
+
+- Implement logs
+- Implement rate limiting
+- Improve Markdown editor
+- Implement billing
+- Implement content sharing with dynamic routes
+- Create documentation
+- Implement content export
+
 ## Contributing
 
 We love our contributors! Here's how you can contribute:

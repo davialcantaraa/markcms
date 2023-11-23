@@ -34,7 +34,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <ContentStoreInitializer content={content.data} />
-      <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
+      <main className="h-[calc(100vh-65px)] w-[calc(100vw-15rem)] overflow-auto pb-10">
         <ContentForm />
       </main>
     </>

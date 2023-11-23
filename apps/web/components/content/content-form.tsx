@@ -21,18 +21,12 @@ import { ContentApiReference } from "./content-api-reference"
 import { FormField } from "./content-form-field"
 
 export const ContentForm = () => {
-  const [beforeUnloadEnable, setBeforeUnloadEnable] = useState(true)
+  const [beforeUnloadEnable, setBeforeUnloadEnable] = useState(false)
   const { content } = useContentStore()
   const router = useRouter()
 
   const form = useForm({
-    defaultValues: content.model?.fields.reduce((acc, item) => {
-      // @ts-ignore
-      acc[item.name.toLowerCase()] =
-        // @ts-ignore
-        content.raw_data?.[item.name.toLowerCase()] ?? ""
-      return acc
-    }, {}),
+    defaultValues: content.raw_data! as any,
   })
 
   useBeforeUnload(beforeUnloadEnable, "You sure?")
@@ -99,7 +93,7 @@ export const ContentForm = () => {
       </div>
       <div className="mx-auto max-w-5xl px-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form className="space-y-6">
             {content.model?.fields.map((item) => (
               <PrimitiveFormField
                 key={item.id}

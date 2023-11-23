@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
+    <main className="h-[calc(100vh-65px)] w-[calc(100vw-15rem)] overflow-auto pb-10">
       <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
         <div>
           <h1 className="text-slate-12 text-[28px] font-bold leading-[34px] tracking-[-0.416px]">

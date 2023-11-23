@@ -46,7 +46,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <ApiKeyStoreInitializer apiKey={apiKey.data} />
-      <main className="h-[calc(100vh-65px)] overflow-auto pb-10">
+      <main className="h-[calc(100vh-65px)] w-[calc(100vw-15rem)] overflow-auto pb-10">
         <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
           <div className="flex items-center gap-2">
             <Link

@@ -100,4 +100,5 @@ enum ContentField {
   EMAIL
   URL
   PHONE
+  SELECTION
 }

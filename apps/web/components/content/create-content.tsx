@@ -47,7 +47,7 @@ export const CreateContent = ({ model }: Props) => {
   return (
     <Button
       size="sm"
-      variant="ghost"
+      variant="fancy"
       className="w-full"
       disabled={createContentMutation.isLoading}
       onClick={handleCreateContent}

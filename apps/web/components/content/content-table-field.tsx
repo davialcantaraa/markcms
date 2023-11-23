@@ -3,6 +3,7 @@
 import { Content, ContentField } from "database"
 import { format } from "date-fns"
 
+import { Badge } from "../ui/badge"
 import { Checkbox } from "../ui/checkbox"
 import { ContentMarkdownSheet } from "./content-markdown-sheet"
 
@@ -13,6 +14,9 @@ interface Props {
 }
 
 export const TableField = ({ type, value, content }: Props) => {
+  console.log(value)
+  console.log(content)
+  console.log(type)
   switch (type) {
     case ContentField.TEXT:
       return <span>{value}</span>
@@ -38,5 +42,13 @@ export const TableField = ({ type, value, content }: Props) => {
       )
     case ContentField.MARKDOWN:
       return <ContentMarkdownSheet markdown={value} content={content} />
+    case ContentField.SELECTION:
+      return (
+        <div className="flex flex-wrap gap-1 min-w-[200px]">
+          {value.map((item: string) => (
+            <Badge className="max-w-[100px] truncate">{item}</Badge>
+          ))}
+        </div>
+      )
   }
 }

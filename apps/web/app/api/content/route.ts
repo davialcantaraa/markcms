@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs"
+import { ContentField } from "database"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -7,6 +8,18 @@ import { db } from "@/lib/prisma"
 const createContentSchema = z.object({
   model_id: z.string().uuid(),
 })
+
+const contentInitialValues = {
+  [ContentField.CHECKBOX.toLowerCase()]: false,
+  [ContentField.DATE.toLowerCase()]: new Date(),
+  [ContentField.EMAIL.toLowerCase()]: "your@email.com",
+  [ContentField.MARKDOWN.toLowerCase()]: "# Start typing...",
+  [ContentField.NUMBER.toLowerCase()]: 0,
+  [ContentField.PHONE.toLowerCase()]: 5555551234,
+  [ContentField.TEXT.toLowerCase()]: "New text",
+  [ContentField.SELECTION.toLowerCase()]: [],
+  [ContentField.URL.toLowerCase()]: "https://markcms.davialcantara.dev",
+}
 
 export async function POST(request: Request) {
   try {
@@ -39,13 +52,22 @@ export async function POST(request: Request) {
         },
       })
 
+      console.log(fields)
+
+      fields.map((item) => {
+        console.log(contentInitialValues[item.name.toLowerCase()])
+      })
+
       return await ctx.content.create({
         data: {
           creator_id: userId,
           model_id,
-          raw_data: fields.map((item) => ({
-            [item.name.toLocaleLowerCase()]: "",
-          })),
+          raw_data: fields.reduce((acc, item) => {
+            // @ts-ignore
+            acc[item.name.toLowerCase()] =
+              contentInitialValues[item.type.toLowerCase()]
+            return acc
+          }, {}),
         },
       })
     })
