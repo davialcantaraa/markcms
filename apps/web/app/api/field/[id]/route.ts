@@ -164,7 +164,7 @@ export async function DELETE(_: Request, { params }: Params) {
 
     return NextResponse.json(
       { message: "Field deleted successfully" },
-      { status: 201 }
+      { status: 202 }
     )
   } catch (error) {
     return NextResponse.json(
