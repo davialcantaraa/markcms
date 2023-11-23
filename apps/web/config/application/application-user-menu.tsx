@@ -1,6 +1,6 @@
 import { Home, ListChecks, User } from "lucide-react"
 
-export const applicationUserMenu = [
+export const APPLICATION_USER_MENU = [
   {
     label: "Homepage",
     url: "/home",

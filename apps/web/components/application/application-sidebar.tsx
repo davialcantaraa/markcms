@@ -3,18 +3,17 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { applicationConfig } from "@/config/application"
-import { applicationNavigation } from "@/config/application-navigation"
+import { APPLICATION_NAVIGATION } from "@/config/application/application-navigation"
 import { cn } from "@/lib/utils"
 
-import { Icons } from "../icons"
+import { Logo } from "../logo"
 import { Badge } from "../ui/badge"
 import { AppUserMenu } from "./application-user-menu"
 
 export const ApplicationSidebar = () => {
   const pathname = usePathname()
 
-  const navigationMarkup = applicationNavigation.map((item) => {
+  const navigationMarkup = APPLICATION_NAVIGATION.map((item) => {
     const isCurrentUrl = pathname.startsWith(item.url)
     return (
       <li key={item.url}>
@@ -41,12 +40,7 @@ export const ApplicationSidebar = () => {
     <aside className="sticky left-0 top-0 z-40 h-screen w-60 flex-col justify-between border-r bg-background px-4 md:flex">
       <div className="flex flex-col items-center">
         <div className="flex h-16 w-full items-center justify-start">
-          <Link href="/" className="hidden items-center space-x-2 md:flex">
-            <Icons.logo className="h-6 w-6 stroke-current" />
-            <span className="hidden font-bold sm:inline-block">
-              {applicationConfig.name}
-            </span>
-          </Link>
+          <Logo />
         </div>
         <nav className="mt-6 flex w-full flex-col gap-4">
           <ul className="grid grid-flow-row auto-rows-max gap-2 text-sm">

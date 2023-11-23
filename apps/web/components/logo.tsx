@@ -1,15 +1,18 @@
 import Link from "next/link"
 
-import { applicationConfig } from "@/config/application"
+import { SITE_CONFIG } from "@/config/site"
 
 import { Icons } from "./icons"
 
 export const Logo = () => {
   return (
-    <Link href="/" className="hidden items-center space-x-2 text-primary md:flex">
+    <Link
+      href="/"
+      className="hidden items-center space-x-2 text-primary md:flex"
+    >
       <Icons.logo className="h-6 w-6 stroke-current" />
       <span className="hidden font-bold sm:inline-block">
-        {applicationConfig.name}
+        {SITE_CONFIG.shortName}
       </span>
     </Link>
   )

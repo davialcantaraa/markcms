@@ -18,8 +18,6 @@ export default async function Page() {
     .then((res) => res.json())
     .catch((e) => console.log(e))
 
-  console.log(stars)
-
   return (
     <main className="flex-1">
       <section className="flex h-screen flex-col items-center justify-between space-y-6 pb-12 pt-16 lg:py-28">

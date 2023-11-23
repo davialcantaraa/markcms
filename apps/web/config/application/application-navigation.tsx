@@ -1,8 +1,6 @@
 import { BarChart, Component, Lock } from "lucide-react"
 
-export type ApplicationNavigation = typeof applicationNavigation
-
-export const applicationNavigation = [
+export const APPLICATION_NAVIGATION = [
   {
     label: "Models",
     url: "/models",

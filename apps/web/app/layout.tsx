@@ -6,16 +6,16 @@ import { Metadata } from "next"
 import { PropsWithChildren } from "react"
 
 import { ThemeProvider } from "@/components/theme-provider"
-import { applicationConfig } from "@/config/application"
+import { SITE_CONFIG } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: {
-    default: applicationConfig.name,
-    template: `%s - ${applicationConfig.name}`,
+    default: SITE_CONFIG.shortName,
+    template: `%s - ${SITE_CONFIG.shortName}`,
   },
-  description: applicationConfig.description,
+  description: SITE_CONFIG.description,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },

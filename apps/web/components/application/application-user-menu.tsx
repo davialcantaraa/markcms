@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { applicationUserMenu } from "@/config/application-user-menu"
+import { APPLICATION_USER_MENU } from "@/config/application/application-user-menu"
 import { getFirstTwoLettersOfString } from "@/lib/utils"
 
 export function AppUserMenu() {
@@ -52,7 +52,7 @@ export function AppUserMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="center" forceMount>
         <DropdownMenuGroup>
-          {applicationUserMenu.map((item) => (
+          {APPLICATION_USER_MENU.map((item) => (
             <DropdownMenuItem key={item.url} asChild>
               <Link href={item.url}>
                 {item.icon}
