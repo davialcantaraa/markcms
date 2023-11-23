@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowRight, Component } from "lucide-react"
+import { Metadata } from "next"
 import Link from "next/link"
 import Balancer from "react-wrap-balancer"
 
@@ -6,7 +7,32 @@ import { Icons } from "@/components/icons"
 import { IntegrationTabs } from "@/components/marketing/integration-tabs"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { SITE_CONFIG } from "@/config/site"
-import { cn, nFormatter } from "@/lib/utils"
+import { absoluteUrl, cn, nFormatter } from "@/lib/utils"
+
+export const metadata: Metadata = {
+  title: "Homepage",
+  description: SITE_CONFIG.description,
+  openGraph: {
+    title: "Homepage",
+    description: SITE_CONFIG.description,
+    type: "website",
+    url: absoluteUrl(`/home`),
+    images: [
+      {
+        url: absoluteUrl("/opengraph-image.png"),
+        width: 1200,
+        height: 630,
+        alt: "Homepage opengraph image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Homepage",
+    description: SITE_CONFIG.description,
+    images: [absoluteUrl("/opengraph-image.png")],
+  },
+}
 
 export default async function Page() {
   const { stargazers_count: stars } = await fetch(
@@ -43,7 +69,8 @@ export default async function Page() {
             style={{ animationDelay: "0.35s", animationFillMode: "forwards" }}
           >
             <Balancer>
-              <i>MarkCMS</i> is a open-source headless Markdown CMS with the best API.
+              <i>MarkCMS</i> is a open-source headless Markdown CMS with the
+              best API.
             </Balancer>
           </p>
 

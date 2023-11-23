@@ -1,4 +1,5 @@
 import { Component, Key } from "lucide-react"
+import { Metadata } from "next"
 
 import { ApiKeyToken } from "@/components/api-keys/api-key-token"
 import { Icons } from "@/components/icons"
@@ -12,6 +13,11 @@ import { getApiKeys } from "@/lib/api/get-api-keys"
 import { getModels } from "@/lib/api/get-models"
 import { cn } from "@/lib/utils"
 
+export const metadata: Metadata = {
+  title: "Onboarding",
+  description: "Follow the steps to use MarkCMS API.",
+}
+
 export default async function Page() {
   const models = await getModels()
   const apiKeys = await getApiKeys()
@@ -24,7 +30,7 @@ export default async function Page() {
       <div className="mx-auto flex w-full items-center justify-between px-6 py-8 md:max-w-5xl">
         <div>
           <h1 className="text-slate-12 text-[28px] font-bold leading-[34px] tracking-[-0.416px]">
-            MarkCMS Onboarding
+            Onboarding
           </h1>
           <p className="text-muted-foreground">
             Follow the steps to use MarkCMS API.

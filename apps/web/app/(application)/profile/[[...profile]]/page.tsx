@@ -1,4 +1,10 @@
 import { UserProfile } from "@clerk/nextjs"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Profile",
+  description: "Manage your profile information.",
+}
 
 export default function Page() {
   return (

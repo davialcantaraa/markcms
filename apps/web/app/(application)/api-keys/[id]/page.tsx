@@ -2,6 +2,7 @@ import { useApiKeyStore } from "@/stores/api-key-store"
 import { ApiKeyStoreInitializer } from "@/stores/api-key-store-initializer"
 import { ContentModel } from "database"
 import { formatDistance } from "date-fns"
+import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { z } from "zod"
@@ -16,6 +17,15 @@ import { capitalizeFirstLetter, cn } from "@/lib/utils"
 
 interface Props {
   params: { id: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const apiKey = await getApiKeyById(params.id)
+
+  return {
+    title: apiKey.data.name,
+    description: `Information for ${apiKey.data.name} API Key.`,
+  }
 }
 
 export default async function Page({ params }: Props) {

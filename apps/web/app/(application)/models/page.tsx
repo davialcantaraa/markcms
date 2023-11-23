@@ -1,6 +1,13 @@
+import { Metadata } from "next"
+
 import { CreateModel } from "@/components/model/create-model"
 import { Models } from "@/components/model/models"
 import { ModelsApiReference } from "@/components/model/models-api-reference"
+
+export const metadata: Metadata = {
+  title: "Models",
+  description: "Create and manage content models.",
+}
 
 export default async function Page() {
   return (

@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react"
+import { Metadata } from "next"
 import Link from "next/link"
 import Balancer from "react-wrap-balancer"
 
@@ -6,6 +7,33 @@ import { BuiltInDocsDialog } from "@/components/docs/built-in-docs-dialog"
 import { Icons } from "@/components/icons"
 import { Logo } from "@/components/logo"
 import { Badge } from "@/components/ui/badge"
+import { SITE_CONFIG } from "@/config/site"
+import { absoluteUrl } from "@/lib/utils"
+
+export const metadata: Metadata = {
+  title: "Documentation",
+  description: SITE_CONFIG.description,
+  openGraph: {
+    title: "Documentation",
+    description: SITE_CONFIG.description,
+    type: "website",
+    url: absoluteUrl(`/home`),
+    images: [
+      {
+        url: absoluteUrl("/opengraph-image.png"),
+        width: 1200,
+        height: 630,
+        alt: "Homepage opengraph image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Documentation",
+    description: SITE_CONFIG.description,
+    images: [absoluteUrl("/opengraph-image.png")],
+  },
+}
 
 export default async function Page() {
   const { stargazers_count: stars } = await fetch(

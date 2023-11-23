@@ -1,6 +1,7 @@
 import { useModelStore } from "@/stores/model-store"
 import { ModelStoreInitializer } from "@/stores/model-store-initializer"
 import { ContentModel } from "database"
+import { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { z } from "zod"
@@ -15,6 +16,15 @@ import { cn } from "@/lib/utils"
 
 interface Props {
   params: { id: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const model = await getModelById(params.id)
+
+  return {
+    title: model.data.name,
+    description: model.data.description,
+  }
 }
 
 export default async function Page({ params }: Props) {
