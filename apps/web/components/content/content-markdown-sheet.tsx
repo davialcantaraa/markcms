@@ -8,12 +8,12 @@ import { MarkdownPreview } from "../markdown/markdown-preview"
 import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 } from "../ui/sheet"
 
 interface Props {
@@ -29,7 +29,7 @@ export const ContentMarkdownSheet = ({ content, markdown }: Props) => {
           <Icons.file size={16} />
         </Button>
       </SheetTrigger>
-      <SheetContent className="px-0">
+      <SheetContent className="px-0 w-1/2 !max-w-none">
         <SheetHeader className="px-6">
           <SheetTitle>Markdown preview</SheetTitle>
           <SheetDescription>
