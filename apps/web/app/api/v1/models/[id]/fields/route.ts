@@ -34,7 +34,7 @@ export async function GET(_: Request, { params }: Params) {
         return "Invalid key"
       }
 
-      const keyHasPermission = validKey?.model === params.id
+      const keyHasPermission = validKey?.model === params.id || validKey?.model === "all"
 
       if (!keyHasPermission) {
         return "Key has no permission"
