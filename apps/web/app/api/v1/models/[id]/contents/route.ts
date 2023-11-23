@@ -34,7 +34,8 @@ export async function GET(_: Request, { params }: Params) {
         return null
       }
 
-      const keyHasPermission = validKey?.model === params.id || validKey?.model === "all"
+      const keyHasPermission =
+        validKey?.model === params.id || validKey?.model === "all"
 
       if (!keyHasPermission) {
         return null
@@ -53,6 +54,7 @@ export async function GET(_: Request, { params }: Params) {
       const contents = await db.content.findMany({
         where: {
           creator_id: validKey.creator_id,
+          model_id: params.id,
         },
       })
 
