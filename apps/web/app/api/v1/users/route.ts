@@ -1,3 +1,4 @@
+import { env } from "@/env.mjs"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
 
@@ -11,6 +12,10 @@ export async function PUT(request: Request) {
     const token = extractToken(String(headerList.get("Authorization")))
 
     if (!token) return NextResponse.json("Unauthorized", { status: 401 })
+
+    const isTokenValid = token === env.MARKCMS_WEBHOOK_KEY
+
+    if (!isTokenValid) return NextResponse.json("Unauthorized", { status: 401 })
 
     const body = await request.json()
 
