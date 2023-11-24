@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: "MarkCMS - Headless CMS for developers",
   shortName: "MarkCMS",
   url: env.NEXT_PUBLIC_APP_URL,
-  ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.jpg`,
+  ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.png`,
   description:
     "MarkCMS is a open-source headless Markdown CMS with the best API.",
   links: {

@@ -78,7 +78,7 @@ export default async function Page() {
             <Card className="max-w-[320px] overflow-hidden">
               <CardContent className="p-0 h-[180px] max-w-[320px] overflow-hidden">
                 <Image
-                  src="/og.png"
+                  src="https://blog-markcms.davicantara.dev/og.png"
                   alt="MarkCMS Blog image"
                   width={1000}
                   height={600}

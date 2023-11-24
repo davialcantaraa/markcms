@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils"
 
 import { Logo } from "../logo"
 import { buttonVariants } from "../ui/button"
-import { Skeleton } from "../ui/skeleton"
 
 export default function SiteHeader() {
   const scrolled = useScroll(50)
@@ -30,7 +29,7 @@ export default function SiteHeader() {
           <Logo />
           <div className=" flex items-center gap-x-2">
             {!isLoaded ? (
-              <Skeleton className="h-10 w-32" />
+              <div />
             ) : isSignedIn ? (
               <Link href="/models" className={cn(buttonVariants({size: "sm"}))}>
                 Dashboard
