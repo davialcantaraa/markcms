@@ -7,7 +7,7 @@ import { Icons } from "./icons"
 export const Logo = () => {
   return (
     <Link
-      href="/"
+      href="/home"
       className="hidden items-center space-x-2 text-primary md:flex"
     >
       <Icons.logo className="h-6 w-6 stroke-current" />

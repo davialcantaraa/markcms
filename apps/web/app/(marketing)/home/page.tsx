@@ -124,6 +124,14 @@ export default async function Page() {
           >
             <Balancer>Integrate in less than 5 minutes</Balancer>
           </h1>
+          <Link
+            href="/examples"
+            className="gradient-box mt-4 rounded-full px-6 py-2.5 text-sm font-medium transition-transform hover:scale-105"
+          >
+            <span className="relative z-30">
+              Examples <ArrowRight className="mb-1 inline-block h-4 w-4" />
+            </span>
+          </Link>
           <IntegrationTabs />
         </div>
       </section>

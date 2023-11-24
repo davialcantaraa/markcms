@@ -24,16 +24,16 @@ export default function SiteFooter() {
         </div>
         <p className="space-x-4 text-center text-sm leading-loose text-muted-foreground md:text-left">
           <Link
-            href="/about"
+            href="/upcoming"
             className="font-semibold hover:underline hover:underline-offset-4"
           >
-            About
+            Upcoming
           </Link>
           <Link
-            href="/changelog"
+            href="/examples"
             className="font-semibold hover:underline hover:underline-offset-4"
           >
-            Changelog
+            Examples
           </Link>
         </p>
       </div>
