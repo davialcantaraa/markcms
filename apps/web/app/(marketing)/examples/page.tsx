@@ -74,11 +74,11 @@ export default async function Page() {
       </section>
       <section className="flex-1 space-y-6 pb-12">
         <div className="container flex max-w-[64rem] flex-col items-center justify-center gap-5 text-center ">
-          <Link href="https://blog-markcms.davicantara.dev/blog">
+          <Link href="https://blog-markcms.davialcantara.dev/blog">
             <Card className="max-w-[320px] overflow-hidden">
               <CardContent className="p-0 h-[180px] max-w-[320px] overflow-hidden">
                 <Image
-                  src="https://blog-markcms.davicantara.dev/og.png"
+                  src="https://blog-markcms.davialcantara.dev/og.png"
                   alt="MarkCMS Blog image"
                   width={1000}
                   height={600}
@@ -94,7 +94,7 @@ export default async function Page() {
               <CardFooter className="text-muted-foreground text-sm flex justify-between items-center">
                 <span>by MarkCMS</span>
                 <Link
-                  href="https://blog-markcms.davicantara.dev/blog"
+                  href="https://blog-markcms.davialcantara.dev/blog"
                   className="hover:text-primary"
                 >
                   <ExternalLink size={16} />
