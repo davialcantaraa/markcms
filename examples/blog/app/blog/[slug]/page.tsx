@@ -88,8 +88,8 @@ export default async function Blog({ params }) {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             headline: post.title,
-            datePublished: post.published_at,
-            dateModified: post.published_at,
+            datePublished: post.date,
+            dateModified: post.date,
             description: post.summary,
             image: `https://blog-markcms.davialcantara.dev/og?title=${post.title}`,
             url: `https://blog-markcms.davialcantara.dev/blog/${post.slug}`,
@@ -105,7 +105,7 @@ export default async function Blog({ params }) {
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.published_at)}
+          {formatDate(post.date)}
         </p>
       </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert">

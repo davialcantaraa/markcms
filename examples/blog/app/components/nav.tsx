@@ -26,6 +26,17 @@ export function Navbar() {
                   return <NavItem key={path} path={path} name={name} />
                 })}
               </Suspense>
+              <span className="relative text-neutral-600 dark:text-neutral-400 py-1 px-2">
+                This is a blog built using{" "}
+                <Link
+                  className="underline"
+                  target="_blank"
+                  href="https://markcms.davialcantara.dev/home"
+                >
+                  MarkCMS
+                </Link>
+                .
+              </span>
             </div>
           </nav>
         </LayoutGroup>

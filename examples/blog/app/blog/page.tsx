@@ -17,7 +17,7 @@ export default async function BlogPage() {
       {allBlogs
         .sort((a, b) => {
           if (
-            new Date(a.published_at) > new Date(b.published_at)
+            new Date(a.date) > new Date(b.date)
           ) {
             return -1;
           }

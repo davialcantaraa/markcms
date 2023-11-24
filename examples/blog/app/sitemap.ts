@@ -4,7 +4,7 @@ export default async function sitemap() {
   const posts = await getPosts()
   let blogs = posts.map((post) => ({
     url: `https://blog-markcms.davialcantara.dev/blog/${post.slug}`,
-    lastModified: post.published_at,
+    lastModified: post.date,
   }))
 
   let routes = ["", "/blog"].map((route) => ({

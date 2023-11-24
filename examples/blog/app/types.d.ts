@@ -5,7 +5,7 @@ export type Post = {
   markdown: string
   created_at: string
   date: string
-  published_at: string
+  updated_at: string
   draft: boolean
   summary: string
   slug: string
