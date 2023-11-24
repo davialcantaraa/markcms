@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     title: "Documentation",
     description: SITE_CONFIG.description,
     type: "website",
-    url: absoluteUrl(`/home`),
+    url: absoluteUrl(`/docs`),
     images: [
       {
         url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
-        alt: "Homepage opengraph image",
+        alt: "Documentation opengraph image",
       },
     ],
   },

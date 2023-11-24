@@ -1,91 +1,177 @@
-import {
-  BarChartIcon,
-  DollarSignIcon,
-  FileDownIcon,
-  ShareIcon,
-  SparklesIcon
-} from "lucide-react"
 import { Metadata } from "next"
 import Balancer from "react-wrap-balancer"
 
-import { Icons } from "@/components/icons"
 import { SITE_CONFIG } from "@/config/site"
 import { absoluteUrl } from "@/lib/utils"
 
 const FEATURES = [
   {
     title: "Activity Tracker",
-    description:
-      "Keep a comprehensive record of all actions performed within the CMS for enhanced visibility and troubleshooting.",
-    icon: <BarChartIcon className="h-8 w-8 text-primary" />,
+    description: "Keep a comprehensive record of all actions performed.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="lucide h-8 w-8 lucide-bar-chart"
+      >
+        <line x1="12" x2="12" y1="20" y2="10" />
+        <line x1="18" x2="18" y1="20" y2="4" />
+        <line x1="6" x2="6" y1="20" y2="16" />
+      </svg>
+    ),
   },
   {
     title: "Markdown Mastery",
     description:
-      "Elevate the Markdown editing experience with advanced features, real-time previews, and a more intuitive interface for seamless content creation.",
-    icon: <Icons.logo className="h-8 w-8 text-primary" />,
+      "Elevate the Markdown editing experience with advanced features.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="lucide h-8 w-8 lucide-heading-1"
+      >
+        <path d="M4 12h8" />
+        <path d="M4 18V6" />
+        <path d="M12 18V6" />
+        <path d="m17 12 3-2v8" />
+      </svg>
+    ),
   },
   {
     title: "Monetization Module",
     description:
-      "Integrate a robust billing system to efficiently manage subscriptions, payments, and invoicing for a seamless SaaS experience.",
-    icon: <DollarSignIcon className="h-8 w-8 text-primary" />,
+      "Integrate a robust billing system to efficiently manage subscriptions.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="lucide h-8 w-8 lucide-dollar-sign"
+      >
+        <line x1="12" x2="12" y1="2" y2="22" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    ),
   },
   {
     title: "Dynamic Sharing Hub",
     description:
-      "Enable users to share content dynamically with customizable routes, fostering collaboration and expanding the reach of your markdown content.",
-    icon: <ShareIcon className="h-8 w-8 text-primary" />,
+      "Enable users to share content dynamically with customizable routes.",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="lucide h-8 w-8 lucide-share-2"
+      >
+        <circle cx="18" cy="5" r="3" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="19" r="3" />
+        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+      </svg>
+    ),
   },
   {
     title: "Ask AI playground",
     description:
       "Unleash the power of artificial intelligence within your CMS with an integrated AI Playground. ",
-    icon: <SparklesIcon className="h-8 w-8 text-primary" />,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="lucide h-8 w-8 lucide-sparkles"
+      >
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+        <path d="M5 3v4" />
+        <path d="M19 17v4" />
+        <path d="M3 5h4" />
+        <path d="M17 19h4" />
+      </svg>
+    ),
   },
   {
-    title: "Export Wizard",
-    description:
-      "Facilitate content portability by implementing a feature-rich export tool, allowing users to seamlessly export their markdown content in various formats.",
-    icon: <FileDownIcon className="h-8 w-8 text-primary" />,
+    title: "SDKs",
+    description: "Empower your developers with our comprehensive SDKs",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="lucide h-8 w-8 lucide-code"
+      >
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
   },
 ]
 
 export const metadata: Metadata = {
-  title: "Homepage",
+  title: "Upcoming",
   description: SITE_CONFIG.description,
   openGraph: {
-    title: "Homepage",
+    title: "Upcoming",
     description: SITE_CONFIG.description,
     type: "website",
-    url: absoluteUrl(`/home`),
+    url: absoluteUrl(`/upcoming`),
     images: [
       {
         url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
-        alt: "Homepage opengraph image",
+        alt: "Upcoming opengraph image",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Homepage",
+    title: "Upcoming",
     description: SITE_CONFIG.description,
     images: [absoluteUrl("/opengraph-image.png")],
   },
 }
 
 export default async function Page() {
-  const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/davialcantaraa/markcms",
-    {
-      next: { revalidate: 3600 },
-    }
-  )
-    .then((res) => res.json())
-    .catch((e) => console.log(e))
-
   return (
     <main className="flex-1">
       <section className="flex flex-col items-center justify-between space-y-6 pb-12 pt-16 lg:py-28">
@@ -103,7 +189,6 @@ export default async function Page() {
           >
             <Balancer>Features that will be implemented soon.</Balancer>
           </p>
-
         </div>
       </section>
       <section
@@ -112,10 +197,7 @@ export default async function Page() {
       >
         <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
           {FEATURES.map((feature) => (
-            <div
-              key={feature.title}
-              className="relative border rounded-xl p-2"
-            >
+            <div key={feature.title} className="relative border rounded-xl p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
                 {feature.icon}
                 <div className="space-y-2">

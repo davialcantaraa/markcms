@@ -20,8 +20,8 @@ export const ApplicationSidebar = () => {
         <Link
           href={item.url}
           className={cn(
-            "group flex h-8 w-full items-center justify-between rounded-md border border-transparent px-2 py-1 text-sm text-muted-foreground hover:bg-primary hover:text-white dark:hover:text-background ",
-            isCurrentUrl && "bg-primary text-white dark:text-background",
+            "group flex h-8 w-full items-center justify-between rounded-md border border-transparent px-2 py-1 text-sm text-muted-foreground hover:bg-primary hover:text-secondary dark:hover:text-background ",
+            isCurrentUrl && "bg-primary text-secondary dark:text-background",
             item.disabled &&
               "pointer-events-none cursor-not-allowed select-none hover:bg-transparent hover:text-muted-foreground"
           )}

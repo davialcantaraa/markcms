@@ -16,40 +16,31 @@ import { SITE_CONFIG } from "@/config/site"
 import { absoluteUrl } from "@/lib/utils"
 
 export const metadata: Metadata = {
-  title: "Documentation",
+  title: "Examples",
   description: SITE_CONFIG.description,
   openGraph: {
-    title: "Documentation",
+    title: "Examples",
     description: SITE_CONFIG.description,
     type: "website",
-    url: absoluteUrl(`/home`),
+    url: absoluteUrl(`/examples`),
     images: [
       {
         url: absoluteUrl("/opengraph-image.png"),
         width: 1200,
         height: 630,
-        alt: "Homepage opengraph image",
+        alt: "Examples opengraph image",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Documentation",
+    title: "Examples",
     description: SITE_CONFIG.description,
     images: [absoluteUrl("/opengraph-image.png")],
   },
 }
 
 export default async function Page() {
-  const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/davialcantaraa/markcms",
-    {
-      next: { revalidate: 3600 },
-    }
-  )
-    .then((res) => res.json())
-    .catch((e) => console.log(e))
-
   return (
     <main className="flex flex-1 items-center flex-col">
       <section className="flex-1 space-y-6 pb-12 pt-16 lg:py-28">
@@ -96,6 +87,7 @@ export default async function Page() {
                 <Link
                   href="https://blog-markcms.davialcantara.dev/blog"
                   className="hover:text-primary"
+                  target="_blank"
                 >
                   <ExternalLink size={16} />
                 </Link>
