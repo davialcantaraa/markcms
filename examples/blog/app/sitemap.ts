@@ -1,21 +1,16 @@
-import { MetadataRoute } from 'next'
-import { allBlogs } from 'contentlayer/generated'
-import siteMetadata from '@/data/siteMetadata'
+import { getPosts } from "./db/blog"
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = siteMetadata.siteUrl
-
-  const blogRoutes = allBlogs
-    .filter((post) => !post.draft)
-    .map((post) => ({
-      url: `${siteUrl}/${post.path}`,
-      lastModified: post.lastmod || post.date,
-    }))
-
-  const routes = ['', 'blog', 'projects', 'tags'].map((route) => ({
-    url: `${siteUrl}/${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
+export default async function sitemap() {
+  const posts = await getPosts()
+  let blogs = posts.map((post) => ({
+    url: `https://blog-markcms.davialcantara.dev/blog/${post.slug}`,
+    lastModified: post.published_at,
   }))
 
-  return [...routes, ...blogRoutes]
+  let routes = ["", "/blog"].map((route) => ({
+    url: `https://blog-markcms.davialcantara.dev${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }))
+
+  return [...routes, ...blogs]
 }

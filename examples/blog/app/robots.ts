@@ -1,13 +1,11 @@
-import { MetadataRoute } from 'next'
-import siteMetadata from '@/data/siteMetadata'
-
-export default function robots(): MetadataRoute.Robots {
+export default function robots() {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
-    host: siteMetadata.siteUrl,
+    rules: [
+      {
+        userAgent: "*",
+      },
+    ],
+    sitemap: "https://blog-markcms.davialcantara.dev/sitemap.xml",
+    host: "https://blog-markcms.davialcantara.dev",
   }
 }
